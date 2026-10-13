@@ -1,0 +1,1529 @@
+<!doctype html>
+<html lang="hy"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Փոքր արբանյակներ · Միջանկյալ 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;500;600;700&family=Noto+Serif+Armenian:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mission-notebook study app (adapted from the Նյութագիտություն platform). Left rail of sections, one working column; figures sit on printed "plates". */
+:root{
+  --bg:#EDF0F0; --surface:#FAFBFB; --sunk:#E3E8E9; --ink:#162027; --muted:#56636C; --line:#CDD5D8;
+  --accent:#2A4C9C; --accent-ink:#FFFFFF; --accent-soft:#DCE4F5; --heat:#B4530F; --heat-soft:#F6E2D2;
+  --good:#2C7A4B; --good-soft:#D9EEDF; --warn:#A86A12; --warn-soft:#F5E8CF; --bad:#B0302A; --bad-soft:#F6DAD8;
+  --plate:#F8F8F5; --plate-ink:#1E1E1E;
+  --f-display:"Noto Serif Armenian","Mshtakan",Georgia,serif;
+  --f-body:"Noto Sans Armenian","Arial","Helvetica Neue",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#11161A; --surface:#182026; --sunk:#0D1215; --ink:#E3E8EB; --muted:#93A1AA; --line:#2A353C;
+  --accent:#8FA9F2; --accent-ink:#0E1630; --accent-soft:#1F2A46; --heat:#F0A060; --heat-soft:#3A2618;
+  --good:#6CC98F; --good-soft:#18301F; --warn:#E3B45B; --warn-soft:#352914; --bad:#F08A82; --bad-soft:#3A1A18;
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#11161A; --surface:#182026; --sunk:#0D1215; --ink:#E3E8EB; --muted:#93A1AA; --line:#2A353C;
+  --accent:#8FA9F2; --accent-ink:#0E1630; --accent-soft:#1F2A46; --heat:#F0A060; --heat-soft:#3A2618;
+  --good:#6CC98F; --good-soft:#18301F; --warn:#E3B45B; --warn-soft:#352914; --bad:#F08A82; --bad-soft:#3A1A18;
+  color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;margin:0}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.25;text-wrap:balance;margin:0}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+.shell{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh}
+.rail{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;height:100vh;padding:24px 16px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:20px;overflow:auto}
+.brand{display:flex;flex-direction:column;gap:2px;padding:0 8px}
+.brand b{font-family:var(--f-display);font-size:20px;letter-spacing:.01em}
+.brand span{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;text-decoration:none;color:var(--ink);font-weight:500;font-size:15px}
+.nav a:hover{background:var(--sunk)}
+.nav a[aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
+.nav .ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6}
+.rail-foot{margin-top:auto;font-size:12px;color:var(--muted);padding:0 8px;display:flex;flex-direction:column;gap:8px}
+.linkbtn{background:none;border:0;padding:0;color:var(--muted);text-decoration:underline;font-size:12px;text-align:left}
+
+main{padding-block:32px 64px;padding-inline:40px;min-width:0}
+.view{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.view-head{display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.view-head h1{font-size:30px;font-weight:700}
+.lede{color:var(--muted);max-width:62ch}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--surface);padding:9px 16px;border-radius:8px;font-weight:600;font-size:15px}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.small{padding:5px 11px;font-size:13px}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+select,input[type="text"],input[type="search"],textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+textarea{width:100%;min-height:150px;resize:vertical;line-height:1.55}
+
+/* Home */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.stat b{font-family:var(--f-mono);font-size:26px;font-weight:500}
+.stat span{font-size:13px;color:var(--muted)}
+.topics{display:flex;flex-direction:column}
+.topic{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.topic:last-child{border-bottom:0}
+.topic h3{font-size:16px;font-family:var(--f-body);font-weight:600}
+.topic p{font-size:13px;color:var(--muted);margin:2px 0 0}
+.segbar{display:flex;gap:3px}
+.segbar i{flex:1;height:10px;border-radius:3px;background:var(--sunk);border:1px solid var(--line)}
+.segbar i.r1{background:var(--bad);border-color:var(--bad)}
+.segbar i.r2{background:var(--warn);border-color:var(--warn)}
+.segbar i.r3{background:var(--good);border-color:var(--good)}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;counter-reset:s}
+.step{border-top:3px solid var(--accent);padding-top:10px;font-size:14px;display:flex;flex-direction:column;gap:4px}
+.step b{font-size:15px}
+.step a{font-size:13px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+/* Lectures */
+.lec-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.lec-tabs button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;font-size:14px;display:flex;gap:6px;align-items:center}
+.lec-tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lec-tabs .dot{width:7px;height:7px;border-radius:50%;background:var(--good)}
+.reader{display:flex;flex-direction:column;gap:30px}
+.reader-head{display:flex;flex-direction:column;gap:8px;padding-bottom:18px;border-bottom:2px solid var(--ink)}
+.reader-head h2{font-size:28px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--sunk);color:var(--muted);letter-spacing:.02em}
+.toc{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:14px}
+.sec{display:flex;flex-direction:column;gap:12px;scroll-margin-top:20px}
+.sec h3{font-size:21px;display:flex;gap:10px;align-items:baseline}
+.sec h3 .n{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-weight:400}
+.sec h4{font-size:17px;margin-top:6px}
+.prose{max-width:68ch}
+.prose p,.prose ul,.prose ol,.prose dl{margin:0 0 10px}
+.prose ul,.prose ol{padding-left:22px}
+.prose li{margin:3px 0}
+.prose dt{font-weight:700;margin-top:12px;font-family:var(--f-display);font-size:16.5px}
+.prose dd{margin:2px 0 0 0;padding-left:14px;border-left:2px solid var(--line)}
+.key{background:var(--accent-soft);border-radius:8px;padding:12px 14px;margin:6px 0 10px}
+.formula{font-family:var(--f-mono);background:var(--sunk);border-radius:6px;padding:8px 12px;margin:8px 0;font-size:14.5px;overflow-x:auto}
+.formula.big{font-size:20px;text-align:center;padding:14px}
+.sup{color:inherit}
+.sup-on .sup{background:linear-gradient(transparent 0, transparent),var(--heat-soft);box-decoration-break:clone;-webkit-box-decoration-break:clone;border-radius:3px;padding:0 2px}
+div.sup,p.sup{display:block}
+.sup-on div.sup,.sup-on p.sup{padding:8px 12px;border-left:3px solid var(--heat)}
+.note{font-size:13.5px;color:var(--muted);font-style:italic}
+.tbl-wrap{overflow-x:auto;max-width:100%}
+.tbl{border-collapse:collapse;font-size:14px;width:100%;margin:6px 0 12px}
+.tbl th{text-align:left;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:2px solid var(--ink);padding:6px 10px 6px 0}
+.tbl td{border-bottom:1px solid var(--line);padding:8px 10px 8px 0;vertical-align:top}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 12px}
+.cmp>div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-width:0}
+.cmp h5{margin:0 0 6px;font-family:var(--f-display);font-size:16px}
+.cmp p,.cmp ul{margin:0}
+.figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+figure{margin:0;display:flex;flex-direction:column;gap:6px}
+.plate{background:var(--plate);border:1px solid var(--line);border-radius:6px;padding:10px;display:flex;align-items:center;justify-content:center;cursor:zoom-in}
+.plate img{max-height:240px;width:auto;mix-blend-mode:multiply}
+figcaption{font-size:13px;color:var(--muted);line-height:1.45}
+figcaption b{font-family:var(--f-mono);font-weight:500;color:var(--ink)}
+.reader-foot{display:flex;gap:10px;flex-wrap:wrap;padding-top:18px;border-top:1px solid var(--line)}
+.lb{position:fixed;inset:0;background:rgba(10,14,16,.86);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;z-index:50}
+.lb img{max-width:min(1100px,100%);max-height:80vh;background:#F8F8F5;padding:12px;border-radius:6px}
+.lb p{color:#E8ECEE;max-width:70ch;text-align:center;margin:0}
+.search-hits{display:flex;flex-direction:column;gap:6px}
+.hit{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;text-align:left;font-size:14px}
+.hit b{display:block;font-size:13px;color:var(--muted);font-weight:600}
+mark{background:var(--heat-soft);color:inherit;border-radius:2px}
+
+/* Questions */
+.qgroup{display:flex;flex-direction:column;gap:10px}
+.qgroup>h2{font-size:19px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.q-head{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:start;padding:14px 16px;width:100%;background:none;border:0;text-align:left}
+.q-id{font-family:var(--f-mono);font-size:14px;color:var(--muted);padding-top:1px}
+.q-text{font-weight:600;font-size:15.5px}
+.badge{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.badge.r0{background:var(--sunk);color:var(--muted)}
+.badge.r1{background:var(--bad-soft);color:var(--bad)}
+.badge.r2{background:var(--warn-soft);color:var(--warn)}
+.badge.r3{background:var(--good-soft);color:var(--good)}
+.q-body{padding:0 16px 16px 80px;display:flex;flex-direction:column;gap:12px}
+.recall{border:1px dashed var(--line);border-radius:8px;padding:12px 14px;color:var(--muted);font-size:14px}
+.answer{border-left:3px solid var(--accent);padding-left:14px}
+.rate{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:14px}
+.rate button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px;font-size:14px;font-weight:600}
+.rate button[data-r="1"][aria-pressed="true"]{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.rate button[data-r="2"][aria-pressed="true"]{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.rate button[data-r="3"][aria-pressed="true"]{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* Study / check modes */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--sunk);padding:5px;border-radius:12px}
+.modes button{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;border:0;background:none;border-radius:8px;padding:10px 14px}
+.modes button span{font-size:13px;color:var(--muted)}
+.modes button[aria-selected="true"]{background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.modes button[aria-selected="true"] b{color:var(--accent)}
+
+/* Writing practice */
+.tip ol{margin:6px 0 0;padding-left:20px;font-size:14.5px}
+.checklist{display:flex;flex-direction:column;gap:6px;background:var(--sunk);border-radius:8px;padding:12px 14px}
+.cl-item{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:start;font-size:14.5px;cursor:pointer}
+.cl-item input{margin-top:5px;accent-color:var(--good)}
+.cl-item:has(input:checked) span{color:var(--muted)}
+details.full{border:1px solid var(--line);border-radius:8px}
+details.full>summary{cursor:pointer;padding:10px 14px;font-weight:600;color:var(--accent)}
+.full-in{padding:4px 14px 16px;display:flex;flex-direction:column;gap:18px}
+.full-in .sec h3{font-size:18px}
+
+/* Flashcards */
+.deck{display:flex;flex-direction:column;align-items:center;gap:16px}
+.card{width:100%;max-width:620px;min-height:260px;perspective:1400px;background:none;border:0;padding:0}
+.card-in{position:relative;width:100%;min-height:260px;transition:transform .45s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d}
+.card.flipped .card-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px;text-align:center}
+.face.back{transform:rotateY(180deg);background:var(--accent-soft)}
+.face .term{font-family:var(--f-display);font-size:26px;font-weight:700}
+.face .def{font-size:18px;max-width:46ch}
+.face small{position:absolute;top:14px;left:18px;font-size:12px;color:var(--muted);letter-spacing:.05em}
+.face .hint{position:absolute;bottom:12px;font-size:12px;color:var(--muted)}
+.deck-ctrl{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.progress{width:100%;max-width:620px;height:6px;background:var(--sunk);border-radius:3px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent);transition:width .3s}
+
+/* Quiz */
+.qz-opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:11px 14px;font-size:15.5px}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .k{font-family:var(--f-mono);color:var(--muted)}
+.opt.ok{background:var(--good-soft);border-color:var(--good)}
+.opt.no{background:var(--bad-soft);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.explain{font-size:14.5px;padding:10px 14px;border-radius:8px;background:var(--sunk)}
+.qz-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.qz-q{font-size:20px;font-family:var(--f-display);font-weight:600}
+.score{font-family:var(--f-mono);font-size:56px;line-height:1}
+.mist{display:flex;flex-direction:column;gap:10px}
+.mist>div{border-left:3px solid var(--bad);padding-left:12px;font-size:14.5px}
+.hist{display:flex;gap:6px;align-items:flex-end;height:60px}
+.hist i{width:22px;background:var(--accent);border-radius:3px 3px 0 0;opacity:.85}
+
+/* Exam */
+.timer{font-family:var(--f-mono);font-size:22px}
+.timer.low{color:var(--bad)}
+.ticket{display:flex;flex-direction:column;gap:10px;padding:18px 0;border-bottom:1px solid var(--line)}
+.ticket h3{font-family:var(--f-body);font-size:16.5px;font-weight:600}
+.ticket .q-id{font-size:13px}
+
+/* Diagram */
+.dg-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.dg{display:block;width:100%;min-width:620px;height:auto;cursor:crosshair;touch-action:manipulation}
+.dg .reg{fill:transparent;stroke:none}
+.dg .reg:hover{fill:var(--accent-soft)}
+.dg .reg.on{fill:var(--heat-soft)}
+.dg .ln{stroke:var(--ink);stroke-width:1.8;fill:none}
+.dg .ln.thin{stroke-width:1;stroke-dasharray:4 4;stroke:var(--muted)}
+.dg .grid{stroke:var(--line);stroke-width:1}
+.dg text{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.dg .axis{fill:var(--muted);font-family:var(--f-mono);font-size:11.5px}
+.dg .pt{fill:var(--accent);font-family:var(--f-mono);font-size:12px;font-weight:500}
+.dg .lbl{fill:var(--muted);font-size:13px;pointer-events:none}
+.dg .mk{fill:var(--heat);stroke:var(--surface);stroke-width:2}
+.dg .mkl{stroke:var(--heat);stroke-width:1;stroke-dasharray:3 3}
+.dg-ctrl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.dg-ctrl label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.dg-ctrl input{width:100%;accent-color:var(--heat)}
+.dg-info{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.dg-info h3{font-size:22px}
+.kv{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 12px;font-size:14.5px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-weight:600}
+
+.mobile-nav{display:none}
+@media (max-width:860px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .rail{display:none}
+  .mobile-nav{display:flex;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);overflow-x:auto;gap:2px;padding:8px 16px}
+  .mobile-nav a{white-space:nowrap;padding:7px 11px;border-radius:999px;text-decoration:none;color:var(--ink);font-size:14px;font-weight:500}
+  .mobile-nav a[aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
+  main{padding-block:20px 48px;padding-inline:16px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .topic{grid-template-columns:minmax(0,1fr)}
+  .q-body{padding-left:16px}
+  .cmp,.dg-info,.dg-ctrl{grid-template-columns:minmax(0,1fr)}
+  .view-head h1{font-size:25px}
+  .reader-head h2{font-size:23px}
+}
+@media (prefers-reduced-motion:reduce){ .card-in{transition:none} }
+/* Wide slide crops: keep figures inside the column */
+.figs>figure,.plate{min-width:0}
+.plate img{max-width:100%;min-width:0;height:auto;object-fit:contain}
+
+/* Orbits explorer */
+.ob{cursor:pointer}
+.ob .lay{stroke:var(--surface);stroke-width:1}
+.ob .l0{fill:#DCE8F5}.ob .l1{fill:#CFDDF0}.ob .l2{fill:#C2D1EA}.ob .l3{fill:#B3C2E2}.ob .l4{fill:#A3B1D6}.ob .l5{fill:#8E9BC6}
+.ob .lay.on{fill:var(--heat-soft);stroke:var(--heat)}
+.ob .orb{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.2}
+.ob .o-geo{fill:var(--accent)}
+.ob .o-gto,.ob .o-heo{fill:none;stroke-dasharray:4 3}
+.ob .olbl{fill:var(--accent);font-family:var(--f-mono);font-size:12px;font-weight:500;pointer-events:none}
+.ob .mkb.obj,.ob .mk2.obj{fill:var(--good)}
+.ob .mkb.haz,.ob .mk2.haz{fill:var(--bad)}
+.ob .mlbl{fill:var(--ink);font-size:11.5px;pointer-events:none}
+.ob .colh{fill:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.ob .karman{stroke:var(--bad);stroke-width:1.4;stroke-dasharray:6 4}
+.ob .lbl{fill:#26324A}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .ob .lay{opacity:.55} }
+:root[data-theme="dark"] .ob .lay{opacity:.55}
+
+</style>
+
+</head><body>
+<div class="mobile-nav" id="mnav"></div>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand"><b>Փոքր արբանյակներ</b><span>Միջանկյալ քննություն 1</span></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="rail-foot">
+      <span>Դասախոսություններ 1–3 · Մ. Հ. Պողոսեան</span>
+      <span>Առաջընթացը պահվում է այս դիտարկիչում։</span>
+      <button class="linkbtn" id="reset">Զրոյացնել առաջընթացը</button>
+    </div>
+  </aside>
+  <main id="main"></main>
+</div>
+<div class="lb" id="lb" hidden><img id="lb-img" alt=""><p id="lb-cap"></p><button class="btn small" id="lb-x">Փակել</button></div>
+
+<script>// Course content: Small Satellites lectures 1–3 (Մ. Հ. Պողոսեան), written questions, flashcards, quiz.
+// Text marked class="sup" is an explanatory supplement, not on the lecture slides.
+window.DATA = {
+lectures: [
+{
+  id: 1, date: "09.09.2026", title: "Փոքր արբանյակների ծավալը, կառուցվածքը, առաքելությունը",
+  sections: [
+  { h: "Տիեզերական արբանյակներ", html: `
+<div class="key"><b>Արբանյակը</b> տիեզերքում գտնվող օբյեկտ է, որը <b>պտտվում է ավելի մեծ օբյեկտի շուրջ</b>։</div>
+<dl>
+<dt>Բնական արբանյակներ</dt><dd>Լուսիններ, որոնք պտտվում են մոլորակի կամ աստղի շուրջ։ Արեգակնային համակարգի բոլոր մոլորակները, <b>բացի Մերկուրիից և Վեներայից</b>, ունեն բնական արբանյակներ։</dd>
+<dt>Արհեստական արբանյակներ</dt><dd>Կարող են լինել <b>անօդաչու սարքեր</b> կամ <b>կառավարվող ռոբոտներ</b>։ Առաջին արհեստական արբանյակը, որը տեղադրվեց ուղեծիր, անօդաչու <b>Sputnik 1</b>-ն էր, որը արձակվեց <b>1957 թ. հոկտեմբերի 4-ին</b>։</dd>
+</dl>
+<div class="key">Արբանյակաշինությունը պահանջում է <b>համակարգված մոտեցում</b>։</div>` },
+  { h: "Տիեզերական ճարտարագիտություն", html: `
+<p><b>Տիեզերական ճարտարագիտությունը</b> բազմամասնագիտական ոլորտ է, որը վերաբերում է <b>արբանյակներին, տիեզերանավերին և ինքնաթիռներին</b>, որոնք գործում են Երկրի մթնոլորտից դուրս։ Այն կենտրոնանում է տիեզերքի հետ կապված <b>համակարգերի և տեխնոլոգիաների նախագծման, զարգացման և շահագործման</b> վրա․ բարձր արդյունավետությամբ տիեզերական համակարգերի և համակարգի բաղադրիչների իրականացման համար։</p>
+<div class="cmp">
+<div><h5>Spacecraft Engineering<br>(Տիեզերանավերի ճարտարագիտություն)</h5><ul><li>Վերաբերում է տիեզերական մեքենաների <b>նախագծմանը, զարգացմանը, կառուցմանը, փորձարկմանը և շահագործմանը</b> (սկզբից մինչև վերջ)՝ արձակվող սարքեր, արբանյակներ և այլն։</li><li>Անդրադառնում է տիեզերանավի <b>ենթահամակարգերի ինժեներությանը</b>՝ կապված ընդհանուր տիեզերանավի և դրա կյանքի ցիկլի հետ։</li></ul></div>
+<div><h5>Space Engineering<br>(Տիեզերական ճարտարագիտություն)</h5><ul><li>Կենտրոնանում է <b>ամբողջական տիեզերական համակարգերի ճարտարապետական զարգացման</b> վրա․ արձակման հրթիռի ընտրություն, վերգետնյա կառավարում, ուղեծրեր և համաստեղություններ, օգտակար բեռներ, առաքելության գործողություններ և այլն։</li></ul></div>
+</div>
+<h4>Տիեզերական առաքելությունների տեսականին</h4>
+<ul><li><b>Արձակման հրթիռ (Launch Vehicle)</b>՝ հրթիռային համակարգեր, որոնք ապահովում են տեղափոխումը Երկրի մակերևույթից տիեզերք։</li>
+<li><b>Երկիր</b>՝ Cloudsat, SMAP (Երկրի դիտարկում)։</li>
+<li><b>Մարդը տիեզերքում</b>՝ Apollo, Gemini։</li>
+<li><b>Արեգակնային համակարգ</b>՝ Մարսագնաց (Mars Rover), Juno։</li>
+<li><b>Տիեզերք (Universe)</b>՝ NuSTAR, SWIFT աստղադիտակներ։</li>
+<li><b>Միջազգային տիեզերակայան (ISS)</b>՝ J-SSOD (փոքր արբանյակների արձակիչ JAXA մոդուլի վրա), բեռնատար նավեր։</li></ul>`,
+    figs: [["l1-scope","Տիեզերական առաքելությունների տեսականին․ արձակման հրթիռներ, Երկիր, մարդը տիեզերքում, Արեգակնային համակարգ, տիեզերք, ISS"]] },
+  { h: "Փոքր արբանյակների ծավալը և զանգվածը", html: `
+<p>CubeSat-ի հիմնական միավորը <b>1U</b>-ն է՝ <b>10 × 10 × 10 սմ</b> խորանարդ։ 2U-ն երկու միավոր է, 3U-ն՝ երեք (<b>≈ 30 սմ</b>)։ Համեմատության համար՝ Juno մեծ տիեզերանավի չափը արևային պանելներով <b>≈ 20 մ</b> է։</p>
+<p>Ձևաչափերի օրինակներ՝ <b>1U CubeSat</b> (10×10×10 սմ), <b>CanSat</b> (≈ 5×10 սմ, ըմպելիքի տուփի չափ), <b>0.5U CubeSat</b> (5×10×10 սմ), <b>0.25U CubeSat</b> (2.5×10×10 սմ), փոքր խորանարդ՝ 5×5×5 սմ։</p>
+<h4>Դասակարգումն ըստ զանգվածի (Small Satellite Nomenclature)</h4>
+<table class="tbl"><thead><tr><th>Դաս</th><th>Զանգված</th><th>Ծավալային համարժեք</th></tr></thead><tbody>
+<tr><td><b>Պիկոարբանյակ</b> (Picosatellite)</td><td class="mono">0.1–1 կգ</td><td>1U CubeSat</td></tr>
+<tr><td><b>Նանոարբանյակ</b> (Nanosatellite)</td><td class="mono">1–10 կգ</td><td>3U, 6U CubeSat</td></tr>
+<tr><td><b>Միկրոարբանյակ</b> (Microsatellite)</td><td class="mono">10–100 կգ</td><td>12U CubeSat</td></tr>
+<tr><td><b>Մինիարբանյակ</b> (Minisatellite)</td><td class="mono">100–500 կգ</td><td>—</td></tr>
+</tbody></table>
+<p><b>Փոքր արբանյակներ (Small Satellites)</b> են համարվում մինչև <b>500 կգ</b> զանգվածով արբանյակները։ Սխեմայում օվալները զանգվածային դասերն են, իսկ կետագծով ուղղանկյունները՝ ծավալային (U) դասերը։</p>
+<p>Զանգվածային սանդղակի մյուս մասում մեծ տիեզերանավերն են․ <b>&lt; 1000 կգ</b>՝ New Horizons, Voyager, MSL Cruise, Hayabusa, MRO, <b>&lt; 5000 կգ</b>՝ Juno, <b>&lt; 10 000 կգ</b>՝ Cassini, Hubble տիեզերական աստղադիտակ։ <span class="note">Զանգվածային սանդղակի սլայդում սահմաններն են &lt;1, &lt;20, &lt;100, &lt;500 կգ, իսկ նոմենկլատուրայի սխեմայում՝ 0.1–1, 1–10, 10–100, 100–500 կգ։</span></p>`,
+    figs: [["l1-cube-juno","1U, 2U, 3U CubeSat-եր (10 և 30 սմ) և Juno տիեզերանավը (≈ 20 մ)"],["l1-forms","Փոքր արբանյակների ձևաչափեր․ 1U CubeSat, CanSat, 0.5U, 0.25U"],["l1-mass","Տիեզերանավերի զանգվածային սանդղակ․ փոքր արբանյակներ՝ մինչև 500 կգ"],["l1-nomen","Փոքր արբանյակների նոմենկլատուրա և 1U CubeSat-ի բաղադրիչները (Bus + Payload = Satellite)"]] },
+  { h: "CubeSat-ի հիմնադիրները", html: `
+<p>CubeSat-ի գաղափարի առաջնորդները և հիմնադիրները (CubeSat Leaders and Originators)՝ <b>Earnest Robinson</b>, <b>Henry Helvajian</b>, <b>Bob Twiggs</b>, <b>Jordi Puig-Suari</b>։</p>
+<p class="sup">CubeSat ստանդարտը մշակվել է 1999 թ.՝ Bob Twiggs-ի (Սթենֆորդի համալսարան) և Jordi Puig-Suari-ի (Cal Poly) նախաձեռնությամբ, որպեսզի ուսանողները կարողանան ստեղծել և արձակել էժան փոքր արբանյակներ։</p>
+<div class="key"><b>CubeSat-ը փոքր արբանյակ է</b> (CubeSat a Small Satellite)։</div>`,
+    figs: [["l1-founders","CubeSat-ի հիմնադիրները և 1U CubeSat"]] },
+  { h: "Համակարգի սահմանումը", html: `
+<p>Համակարգերի ճարտարագիտության մեջ համակարգը կարող է սահմանվել հետևյալ կերպ․</p>
+<div class="key">«<b>Համակարգը փոխազդող տարրերի համակցություն է, որոնք կազմակերպված են մեկ կամ մի քանի նշված նպատակներին հասնելու համար</b>»։<br><i>“A system is a combination of interacting elements organized to achieve one or more stated purposes.”</i> — INCOSE SE Handbook, V3.2</div>
+<h4>Տիեզերական արբանյակների համակարգը (հիերարխիա)</h4>
+<ol><li><b>Համակարգ</b> (System)</li><li><b>Ենթահամակարգեր</b> (Subsystems)</li><li><b>Հոսքագծեր / հավաքույթներ</b> (Assemblies)</li><li><b>Բաղադրիչներ</b> (Components)</li><li><b>Տեխնոլոգիաներ</b> (Technologies)</li></ol>
+<p>Յուրաքանչյուր մակարդակ ներառված է նախորդի մեջ․ տեխնոլոգիաները կազմում են բաղադրիչներ, բաղադրիչները՝ հավաքույթներ, դրանք՝ ենթահամակարգեր, իսկ ենթահամակարգերը՝ համակարգ։</p>`,
+    figs: [["l1-hierarchy","Տիեզերական արբանյակների համակարգը․ համակարգ → ենթահամակարգեր → հավաքույթներ → բաղադրիչներ → տեխնոլոգիաներ"]] },
+  { h: "Առաքելության նպատակը", html: `
+<p><b>Ինչն է նպատակը</b>՝ փոքր արբանյակների գործածման եղանակները․</p>
+<table class="tbl"><thead><tr><th>Հապավում</th><th>Նշանակություն</th></tr></thead><tbody>
+<tr><td class="mono"><b>TD</b></td><td>Տեխնոլոգիայի ցուցադրում (Technology Demonstration)</td></tr>
+<tr><td class="mono"><b>SSI</b></td><td>Տիեզերական գիտությունների ուսումնասիրություն (Space Science Investigation)</td></tr>
+<tr><td class="mono"><b>Com</b></td><td>Հաղորդակցություն (Communication)</td></tr>
+<tr><td class="mono"><b>Edu</b></td><td>Ուսումնական (Education)</td></tr>
+<tr><td class="mono"><b>EO</b></td><td>Երկրի դիտում (Earth Observation)</td></tr>
+<tr><td class="mono"><b>SPI</b></td><td>Մոլորակային գիտություն և հետախուզում (Space/Planetary Investigation)</td></tr>
+</tbody></table>
+<div class="key">Վերջնական նպատակը՝ <b>Հայաստանի ապահովություն և անվտանգություն</b>։</div>` },
+  { h: "Արբանյակի բասը և արդյունաբերության կարիքները", html: `
+<p><b>Արբանյակ = Բաս (Bus, պլատֆորմ) + Օգտակար բեռ (Payload)</b>։ 1U CubeSat-ի բասը ներառում է՝ <b>ADCS</b> (դիրքորոշման որոշում և կառավարում), <b>OBC</b> (ներդիր համակարգիչ), <b>Comm</b> (կապ), <b>EPS</b> (էլեկտրասնուցում), <b>արևային պանելներ</b>, <b>ալեհավաք</b>։ Վերևում տեղադրվում է օգտակար բեռը։</p>
+<h4>Բասի ընտրություն (Choosing Spacecraft Bus)</h4>
+<ul><li><b>Պտտման առանցքով կայունացված (Spin Axis Stabilized)</b>՝ արբանյակը պտտվում է իր առանցքի շուրջ, և պտույտը պահպանում է կողմնորոշումը։</li>
+<li><b>Եռառանցք կայունացված</b> (օր․ Cassini)՝ կողմնորոշումը պահվում է <b>շարժիչներով (thrusters)</b> և <b>ռեակցիոն անիվներով (reaction wheels)</b>։ <span class="note">Cassini-ի նկարում մարդու պատկերը ցույց է տալիս մասշտաբը։</span></li></ul>
+<h4>Արբանյակային արդյունաբերության կարիքները (Satellites Industry Needs)</h4>
+<table class="tbl"><thead><tr><th>Ձևաչափ</th><th>Օրինակ</th></tr></thead><tbody>
+<tr><td class="mono">12U</td><td>Aoxiang Zhixing</td></tr>
+<tr><td class="mono">6U (2×3U)</td><td>EcAMSat [NASA]</td></tr>
+<tr><td class="mono">6U (1×6U)</td><td>ALTAIR 1</td></tr>
+<tr><td class="mono">2U</td><td>ION [UoI]</td></tr>
+<tr><td class="mono">1.5U</td><td>FIREBIRD [MSGC]</td></tr>
+<tr><td class="mono">0.5U</td><td>AeroCube 6 [The Aerospace Corporation]</td></tr>
+<tr><td class="mono">0.25U</td><td>Space Bee (SWARM Technology)</td></tr>
+<tr><td>CanSat</td><td>տուփի չափի ուսումնական արբանյակ</td></tr>
+</tbody></table>`,
+    figs: [["l1-bus-types","Բասի ընտրություն․ պտտմամբ կայունացված արբանյակ և Cassini (շարժիչներ, ռեակցիոն անիվ)"],["l1-industry","Արդյունաբերության կարիքներ․ 12U-ից մինչև 0.25U CubeSat-եր և CanSat"]] },
+  { h: "Տեխնոլոգիական պատրաստվածության մակարդակներ (TRL)", html: `
+<p><b>TRL (Technology Readiness Level)</b>՝ տեխնոլոգիայի հասունության 9 մակարդականի սանդղակ։ Այն մաս է կազմում <b>համակարգերի զարգացման կյանքի ցիկլի (SDLC)</b>։</p>
+<table class="tbl"><thead><tr><th>Խումբ</th><th>Մակարդակ</th><th>Ինչ է նշանակում</th></tr></thead><tbody>
+<tr><td>Հիմնարար հետազոտություն</td><td class="mono">TRL 1–2</td><td>Հիմնարար հետազոտություն և տեխնոլոգիայի զարգացում</td></tr>
+<tr><td>Իրագործելիության ապացույց</td><td class="mono">TRL 3–4</td><td>Գաղափարի ապացույց (Proof of Concept) և լաբորատոր մակետ (Breadboard)</td></tr>
+<tr><td>Տեխնոլոգիայի ցուցադրում</td><td class="mono">TRL 5–6</td><td>Տեխնոլոգիայի ցուցադրում (Technology Demonstration)</td></tr>
+<tr><td>Ստուգում</td><td class="mono">TRL 7</td><td>Տեխնոլոգիայի փորձարկում, ստուգում և վավերացում (Verification &amp; Validation)</td></tr>
+<tr><td>Համակարգում</td><td class="mono">TRL 8</td><td>Տեխնոլոգիայի փորձարկումը համակարգի կազմում</td></tr>
+<tr><td>Թռիչք</td><td class="mono">TRL 9</td><td>Տեխնոլոգիայի հաջող կիրառումը տիեզերական միջավայրում</td></tr>
+</tbody></table>
+<h4>Ընդհանուր տեխնոլոգիաների կյանքի ցիկլի մոդել (սահմանումներ)</h4>
+<ol><li>Տեխնոլոգիայի հիմնական հատկությունների սկզբունքային հետազոտություն։</li>
+<li>Տեխնոլոգիայի գաղափարի կամ կիրառման «հայտնագործում»․ անցում սկզբունքայինից կիրառական հետազոտության։</li>
+<li>Կրիտիկական ֆունկցիոնալության նախնական «գաղափարի ապացույց» ակտիվ R&amp;D-ի միջոցով (վերլուծական և լաբորատոր ուսումնասիրություններ)։</li>
+<li>Ցածր ճշգրտության վավերացում լաբորատոր միջավայրում․ զարգացումը կենտրոնանում է նախագծի պահանջների վրա։</li>
+<li>Հիմնական տեխնոլոգիական տարրերի վավերացում համապատասխան միջավայրում (ավելի բարձր ճշգրտություն, քան TRL 4-ում)։</li>
+<li>Բարձր ճշգրտության «ալֆա» նախատիպի ցուցադրում համապատասխան միջավայրում։</li>
+<li>«Բետա» նախատիպի (համապատասխան կամ լրիվ մասշտաբի) ցուցադրում գործառնական միջավայրում։</li>
+<li>Ավարտուն բաղադրիչ, ենթահամակարգ կամ համակարգ՝ որակավորված նախագծի պահանջներին և/կամ ստանդարտներին։</li>
+<li>Սերտիֆիկացված բաղադրիչ, ենթահամակարգ կամ համակարգ, որն «իրական» շահագործմամբ ապացուցել է բոլոր պահանջներին համապատասխանությունը։</li></ol>
+<div class="key">CubeSat առաքելությունները պահանջում են <b>TRL 9</b> տեխնոլոգիաներ, այսինքն՝ <b>թռիչքային որակավորում ունեցող (flight qualified) բաղադրիչներ</b>։</div>`,
+    figs: [["l1-trl","TRL ջերմաչափ․ հիմնարար հետազոտությունից մինչև համակարգի փորձարկում, արձակում և շահագործում"],["l1-trl-table","TRL 1–9 սահմանումները"]] }
+  ]
+},
+{
+  id: 2, date: "16.09.2026", title: "Արբանյակաշինություն և արբանյակների տեխնոլոգիաներ",
+  sections: [
+  { h: "Դասախոսության թեմաները", html: `
+<p>Ներածություն <b>տիեզերական միջավայրին և դրա ազդեցությանը արբանյակային համակարգի վրա</b>․</p>
+<ol><li>Ի՞նչ է տիեզերքը և որտեղից է այն սկսվում։</li><li>Ինչո՞ւ ենք ուսումնասիրում տիեզերքը։</li><li>Ուղեծրերի դասակարգումը և խնդիրները։</li></ol>
+<h4>Տիեզերական ճարտարագիտության և արբանյակային առաքելությունների նախագծման թեմաները</h4>
+<ol><li>Տիեզերական առաքելությունների տեսականին</li><li>Արբանյակների ամենատարածված չորս տեսակները</li><li>Արբանյակների օգտակար բեռնվածության տեսականին</li><li>Արբանյակների պլատֆորմի (բասի) տեսականին</li><li>Տիեզերական առաքելությունների նախագծման առաջին փուլը</li><li>Ավիատիեզերական համակարգերի ղեկավարում</li><li>Տիեզերական համակարգային ճարտարագիտության մեթոդները (V-մոդել, Waterfall, Spiral)</li><li>Տեխնոլոգիական պատրաստվածության մակարդակներ (TRL)</li><li>Միջազգային ընդունված տիեզերական ստանդարտներ</li><li>Միջազգային տիեզերակայան (ISS)՝ համագործակցության փառավոր օրինակ</li></ol>` },
+  { h: "Թռչող սարքեր և դիտարկման հարթակներ", html: `
+<p><b>Օդային համակարգեր (Airborne Systems)</b>՝ անօդաչու թռչող սարքեր (դրոններ, UAV), պարապլաններ, ուղղաթիռներ, ինքնաթիռներ։</p>
+<p>Դիտարկման հարթակները ըստ բարձրության բաժանվում են երեք խմբի՝ <b>վերգետնյա (Ground-based)</b>, <b>օդային (Airborne)</b> և <b>տիեզերական (Spaceborne)</b>։</p>
+<table class="tbl"><thead><tr><th>Հարթակ</th><th>Բարձրություն</th><th>Խումբ</th></tr></thead><tbody>
+<tr><td>Դրոն (UAV)</td><td class="mono">≈ 150 մ</td><td>օդային</td></tr>
+<tr><td>Օդային հեռուստատեսություն (ուղղաթիռ)</td><td class="mono">0.3 կմ</td><td>օդային</td></tr>
+<tr><td>Օդային լուսանկարահանում (ինքնաթիռ)</td><td class="mono">1.2–3.5 կմ</td><td>օդային</td></tr>
+<tr><td>Օդային SAR (ռադար)</td><td class="mono">10–12 կմ</td><td>օդային</td></tr>
+<tr><td>Space Shuttle</td><td class="mono">185–575 կմ</td><td>տիեզերական</td></tr>
+<tr><td>Արբանյակ՝ օպտիկական սենսոր / SAR</td><td class="mono">700–900 կմ</td><td>տիեզերական</td></tr>
+</tbody></table>
+<p class="sup">SAR (Synthetic Aperture Radar)՝ սինթեզված ապերտուրայով ռադար, որը պատկեր է ստանում ռադիոալիքներով՝ անկախ ամպամածությունից և լուսավորությունից։</p>`,
+    figs: [["l2-airborne","Օդային համակարգեր․ դրոն, անօդաչու ինքնաթիռ, պարապլան, ուղղաթիռ, ինքնաթիռ"],["l2-altitudes","Վերգետնյա, օդային և տիեզերական հարթակների բարձրությունները"]] },
+  { h: "Հաղորդակցության կապերը", html: `
+<p>Համակարգը բաղկացած է չորս մասից․ <b>(A) դաշտ</b> (սենսորային ցանց), <b>(B) UAV ցանց</b>, <b>(C) արբանյակային կառավարման համակարգ</b>, <b>(D) վերգետնյա կառավարման կայան</b>։ <b>Քարմանի գիծը</b> բաժանում է օդային (Airborne) և տիեզերական (Spaceborne) մասերը։</p>
+<div class="cmp">
+<div><h5>Հաղորդակցության կապեր (Communication Links)</h5><ul><li>UAV ↔ UAV և UAV ↔ դաշտ</li><li>Ներքին կապ սենսորային դաշտում</li></ul></div>
+<div><h5>Կառավարման կապեր (Control Links)</h5><ul><li>UAV ↔ UAV և UAV ↔ կառավարման կայան (CS)</li><li>Արբանյակ ↔ UAV-ներ և CS</li></ul></div>
+</div>
+<p><b>Կառավարման կայանի</b> գործառույթները՝ դաշտի տվյալներ, UAV-ների կառավարում, սպասարկում։</p>`,
+    figs: [["l2-links","Հաղորդակցության և կառավարման կապերը․ (A) դաշտ, (B) UAV ցանց, (C) արբանյակ, (D) վերգետնյա կայան"]] },
+  { h: "Տիեզերական միջավայր", html: `
+<p><b>Տիեզերական միջավայրը (Space Environment)</b> բնութագրող գործոնները, որոնք ազդում են արբանյակային համակարգի վրա․</p>
+<ul><li><b>Ճառագայթում</b> (Radiation)</li><li><b>Լիցքավորված մասնիկներ</b> (Charged particles)</li><li><b>Ձգողականություն</b> (Gravity)</li><li><b>Մթնոլորտ</b> (Atmosphere)</li><li><b>Վակուում</b> (Vacuum)</li><li><b>Ջերմաստիճան</b> (Temperature)</li><li><b>Միկրոմետեորիտներ և տիեզերական աղբ</b> (Micrometeoroids and space debris)</li></ul>
+<p>Թեմաները ներառում են նաև տիեզերական հեռանկարը (Cosmic Perspective) և <b>կյանքն ու աշխատանքը տիեզերքում</b> (Living and working in space)։</p>`,
+    figs: [["l2-layers","Մթնոլորտի շերտերը․ տրոպոսֆերա, ստրատոսֆերա, մեզոսֆերա, թերմոսֆերա (ISS ≈ 400 կմ), էկզոսֆերա"]] },
+  { h: "Մթնոլորտի շերտերը և Քարմանի գիծը", html: `
+<table class="tbl"><thead><tr><th>Շերտ</th><th>Բարձրություն</th><th>Առանձնահատկություն</th></tr></thead><tbody>
+<tr><td><b>Տրոպոսֆերա</b></td><td class="mono">0–10(12) կմ</td><td>Բարձրության հետ ջերմաստիճանը նվազում է, օդը նոսրանում է (ցուրտ)</td></tr>
+<tr><td><b>Ստրատոսֆերա</b></td><td class="mono">մինչև 50 կմ</td><td>Ավելի տաք է, այստեղ է <b>օզոնային շերտը</b></td></tr>
+<tr><td><b>Մեզոսֆերա</b></td><td class="mono">մինչև 85 կմ</td><td>Օդն ավելի նոսր է, բարձրության հետ ավելի ցուրտ (<b>−90 °C</b>)</td></tr>
+<tr><td><b>Թերմոսֆերա</b></td><td class="mono">85 → 500–1000 կմ</td><td><b>1500 °C</b>, շատ ցածր խտություն․ ISS, բևեռափայլ, համընկնում է <b>իոնոսֆերայի</b> հետ (կապ)</td></tr>
+<tr><td><b>Էկզոսֆերա</b></td><td class="mono">1000 → ~10 000 կմ</td><td>Օդը չափազանց նոսր է․ գազի մոլեկուլներ, հիմնականում <b>ջրածին և հելիում</b></td></tr>
+</tbody></table>
+<div class="key"><b>Տիեզերքը սկսվում է Քարմանի գծից</b>՝ մոտ <b>100 կմ</b> (62 մղոն) բարձրության վրա։</div>
+<p class="note">Տարբեր սլայդներում շերտերի սահմանները մի փոքր տարբեր են (օր․ թերմոսֆերա 80–700 կմ, էկզոսֆերա 700–10 000 կմ)։</p>`,
+    figs: [["l2-karman","Որտեղից է սկսվում տիեզերքը․ Քարմանի գիծը ≈ 100 կմ"]] },
+  { h: "Հիմնական ֆիզիկական մեծություններ", html: `
+<dl>
+<dt>Զանգված</dt><dd>Որքա՞ն նյութ ունի մարմինն իր մեջ։</dd>
+<dt>Իներցիա</dt><dd>Որքան դժվար է ինչ-որ բան տեղափոխելը (շարժման վիճակը փոխելը)։</dd>
+<dt>Քաշ</dt><dd>Ձգողականության ազդեցությունը զանգվածի վրա։ <span class="sup">W = m·g</span></dd>
+<dt>Էներգիա</dt><dd><b>Պոտենցիալ</b> և <b>կինետիկ</b> էներգիա։ <span class="sup">E<sub>կ</sub> = m·v²/2, E<sub>պ</sub> ≈ m·g·h</span></dd>
+<dt>Իմպուլս</dt><dd><b>Գծային իմպուլսը</b> մարմնի զանգվածի և արագության արտադրյալն է (<b>p = m·v</b>)։ <b>Անկյունային իմպուլսը</b> մարմնի պտտվող հատկությունների չափանիշն է։ <span class="sup">L = I·ω</span></dd>
+</dl>
+<p class="sup">Ուղեծրում արբանյակը «անկշռության» մեջ է ոչ թե այն պատճառով, որ ձգողականություն չկա, այլ որովհետև այն անընդհատ «ընկնում» է Երկրի շուրջ․ շրջանային ուղեծրի արագությունը v = √(μ/r), μ = 398 600 կմ³/վ²։</p>` },
+  { h: "Ուղեծրերի դասակարգումը", html: `
+<table class="tbl"><thead><tr><th>Ուղեծիր</th><th>Բարձրություն</th><th>Առանձնահատկություն, կիրառում</th></tr></thead><tbody>
+<tr><td><b>LEO</b> (Low Earth Orbit, Երկրի ցածր)</td><td class="mono">160–1500 կմ</td><td>Կարճ պարբերություն՝ <b>90–120 րոպե</b>, օրական մինչև <b>16 պտույտ</b>։ Հարմար է հեռազննման, Երկրի դիտարկման և գիտական հետազոտությունների համար, քանի որ տվյալները արագ են ստացվում և փոխանցվում։ Iridium, Globalstar, Orbcomm․ տասնյակից հարյուրավոր արբանյակներ կազմում են <b>mesh ցանցեր</b>։</td></tr>
+<tr><td><b>MEO</b> (Medium Earth Orbit, միջին)</td><td class="mono">5000–20 000 կմ</td><td>Դիրքորոշման և նավիգացիոն ծառայություններ՝ <b>GPS, GLONASS, Galileo (GNSS)</b>։</td></tr>
+<tr><td><b>GEO</b> (Geostationary, գեոստացիոնար)</td><td class="mono">35 786 կմ</td><td>Ճշգրիտ <b>հասարակածի վերևում</b>։ Երեք հավասարաչափ տեղակայված արբանյակները կարող են ապահովել <b>գրեթե ամբողջ աշխարհի ծածկույթ</b>։ Inmarsat, Eutelsat, Astra (Sky)․ Inmarsat-ն ունի ընդամենը 13 արբանյակ։</td></tr>
+<tr><td><b>SSO</b> (Sun-Synchronous, արեգակնային համաժամանակյա)</td><td class="mono">600–800 կմ</td><td>Անցնում է <b>հյուսիսից հարավ՝ բևեռներով</b>։ Թեքությունը և բարձրությունը ընտրված են այնպես, որ արբանյակը միշտ հատի տրված վայրը <b>նույն տեղական արեգակնային ժամին</b>․ լուսավորությունը նույնն է, ինչը իդեալական է Երկրի դիտարկման և միջավայրի մոնիթորինգի համար։</td></tr>
+<tr><td><b>GTO</b> (Geostationary Transfer Orbit)</td><td class="mono">մինչև 35 786 կմ</td><td><b>Փոխանցման ուղեծիր</b>, որով արբանյակը անցումային ուղեծրից տեղափոխվում է GEO։ Արձակող հրթիռները արբանյակը թողնում են փոխանցման ուղեծրում, այնուհետև <b>արբանյակի շարժիչը</b> միանում է՝ նպատակակետին հասնելու և թեքությունը կարգավորելու համար։</td></tr>
+<tr><td><b>HEO</b> (Highly Elliptic Orbit)</td><td class="mono">≈ 40 000 կմ (ապոգեյ)</td><td>Խիստ էլիպսաձև ուղեծիր։</td></tr>
+</tbody></table>
+<p><b>Գեոստացիոնար</b> ուղեծիրը հասարակածային է, և արբանյակը երկնքում անշարժ է թվում։ <b>Գեոսինխրոն</b> ուղեծիրն ունի նույն պարբերությունը (մեկ օր), բայց կարող է թեքված լինել հասարակածի նկատմամբ։</p>
+<p>Որքան բարձր է ուղեծիրը, այնքան <b>մեծ է ծածկույթի տարածքը</b> (GEO &gt; MEO &gt; LEO)։</p>
+<p class="sup">Պարբերությունը որոշվում է Կեպլերի III օրենքով՝ T = 2π·√(r³/μ), r = R<sub>Երկիր</sub> + h։ 400 կմ-ում T ≈ 92 րոպե, 35 786 կմ-ում T ≈ 23 ժ 56 ր (մեկ աստղային օր)։ Փորձեք «Ուղեծրեր» բաժնում։</p>`,
+    figs: [["l2-orbits","LEO, MEO և գեոստացիոնար ուղեծրեր․ բարձրություններ և օպերատորներ"],["l2-cone","Ծածկույթը ըստ ուղեծրի բարձրության․ GEO/IGSO, MEO, LEO"],["l2-leo","LEO՝ 160–1500 կմ"],["l2-meo","MEO՝ 5000–20 000 կմ"],["l2-geo","GEO՝ 35 786 կմ, հասարակածի վերևում"],["l2-sso","SSO՝ 600–800 կմ, բևեռներով"],["l2-gto","GTO՝ կապույտ գիծը միացնում է դեղին (ցածր) և կարմիր (GEO) ուղեծրերը"],["l2-orbits2","LEO, MEO, GEO, HEO․ երեք GEO արբանյակի ծածկույթ․ գեոստացիոնար և գեոսինխրոն ուղեծրեր"]] },
+  { h: "Ճառագայթում և ուղեծրային խանգարումներ", html: `
+<p>Խնդիրներ, որոնց հանդիպում ենք ուղեծրի վերլուծության ժամանակ․</p>
+<h4>Ճառագայթում</h4>
+<ul><li><b>Վան Ալլենի գոտիներ</b>․ ներքին գոտին գտնվում է <b>1000–13 000 կմ</b> բարձրությունների վրա և պարունակում է <b>բարձր էներգիայի պրոտոններ</b>։</li>
+<li><b>Հարավատլանտյան անոմալիա (SAA)</b>․ սովորաբար հանդիպում է Երկրից <b>200–800 կմ</b> բարձրության վրա։</li>
+<li>Բացի այդ, կա նաև <b>Արեգակնային ճառագայթում</b>։</li></ul>
+<h4>Խանգարումներ (Perturbations)</h4>
+<p><b>Խանգարումը</b> փոքր ուժ կամ ազդեցություն է, որը շեղում է առաջացնում արբանյակի <b>իդեալական ուղեծրից</b>։ Տարածված տեսակներն են՝</p>
+<ol><li>մթնոլորտային դիմադրություն,</li><li>Երկրի փքվածություն (սեղմվածություն),</li><li>Լուսնի և Արեգակի ձգողության ուժ,</li><li>մագնիսական դաշտի փոխազդեցություններ և այլն։</li></ol>
+<div class="key">Ցածր բարձրությունների վրա՝ <b>600 կմ-ից ցածր</b>, արբանյակները հակված են <b>անկման</b>, ինչը պայմանավորված է մթնոլորտային դիմադրությամբ։ Արեգակնային ակտիվությունը նույնպես ազդում է արբանյակների <b>կյանքի տևողության</b> վրա։</div>`,
+    figs: [["l2-vanallen","Վան Ալլենի գոտիներ և Հարավատլանտյան անոմալիա (SAA)"]] },
+  { h: "Արբանյակների ամենատարածված չորս տեսակները", html: `
+<p>Կախված իրենց կիրառությունից՝ արբանյակների ամենատարածված չորս տեսակներն են․</p>
+<dl>
+<dt>Կապի արբանյակներ</dt><dd>Տեղակայված են <b>GEO</b>-ում, ստանում են Երկրից ազդանշաններ և վերահաղորդում դրանք մոլորակին՝ ռադիո, հեռուստատեսություն, հեռախոս և ինտերնետ։</dd>
+<dt>Երկրի դիտարկման արբանյակներ</dt><dd>Նպատակն է մեր մոլորակը տիեզերքից վերահսկել և հաղորդել ցանկացած դիտարկվող փոփոխության մասին։</dd>
+<dt>Նավիգացիոն արբանյակներ</dt><dd>Համաստեղությունները գտնվում են Երկրի մակերևույթից <b>20 000–37 000 կմ</b> հեռավորության վրա։ Հաղորդում են ազդանշաններ, որոնք ցույց են տալիս <b>ժամանակը, դիրքը տարածության մեջ և առողջական (տեխնիկական) վիճակը</b>։</dd>
+<dt>Աստղագիտական արբանյակներ</dt><dd>Ուղեծրում գտնվող աստղադիտակներ, որոնք կարող են լավ տեսնել <b>առանց Երկրի մթնոլորտի միջամտության</b>, և նրանց ինֆրակարմիր պատկերագրման տեխնոլոգիան կարող է աշխատել՝ առանց մոլորակի մակերևույթի ջերմաստիճանից խաբվելու։</dd>
+</dl>` },
+  { h: "Արբանյակների օգտակար բեռնվածությունը", html: `
+<dl>
+<dt>Կապի բեռ</dt><dd>Տեղակայված GEO-ում և համալրված <b>տրանսպոնդերներով</b>՝ ռադիոալիքների ընդունիչ և հաղորդիչ միավորով։ Ընդունում է ազդանշաններ Երկրից և վերահաղորդում դեպի մոլորակ (ռադիո, հեռուստատեսություն, հեռախոս, ինտերնետ)։</dd>
+<dt>Երկրի զոնդավորում (հեռազննում)</dt><dd>Նպատակն է վերահսկել մոլորակը և հաղորդել արձանագրված փոփոխությունները։ Հիմնական կիրառությունները՝ <b>շրջակա միջավայրի մոնիթորինգ</b> և <b>աշխարհագրական քարտեզագրում</b>։ Արբանյակները շրջում են Երկիրը երեք տեսակի ուղեծրերից մեկում՝ <b>բևեռային, շրջանաձև կամ գեոստացիոնար</b>։</dd>
+</dl>
+<div class="cmp">
+<div><h5>Պասիվ հեռազննում</h5><p>Օգտագործում է <b>բազմասպեկտրային կամ հիպերսպեկտրային սենսորներ</b>, որոնք չափում են ստացված (արտացոլված կամ ճառագայթված) ազդանշանը տարբեր սպեկտրալ գոտիներով՝ <b>տեսանելի, ինֆրակարմիր, մոտ ինֆրակարմիր, ջերմային ինֆրակարմիր, միկրոալիքային</b>։ Ազդանշանի աղբյուրը Արեգակն է կամ մակերևույթը։</p></div>
+<div><h5>Ակտիվ հեռազննում</h5><p>Համակարգեր, որոնք <b>ինքնուրույն արձակում են ազդանշան</b> և չափում դրա անդրադարձը․ <b>ռադար, լիդար, լազերային բարձրաչափ, հեռավորության չափիչներ, ձայնային զոնդեր, սկատերոմետր</b>։</p></div>
+</div>
+<dl>
+<dt>Օդերևութաբանական (եղանակային) արբանյակներ</dt><dd>Վերահսկում և կանխատեսում են եղանակային պայմանները՝ տրամադրելով իրական ժամանակի տվյալներ։ <b>GEO ուղեծրերը իդեալական են</b> եղանակային արբանյակների համար։</dd>
+<dt>Նավիգացիա</dt><dd>Համաստեղությունները 20 000–37 000 կմ բարձրության վրա են․ արձակում են ազդանշաններ, որոնք փոխանցում են ճշգրիտ ժամանակը, դիրքը և տեխնիկական վիճակը։
+<ul><li><b>GNSS</b> (Գլոբալ նավիգացիոն արբանյակային համակարգ)՝ գլոբալ ծածկույթ, դիրքորոշում (գեոլոկացիա)․ <b>Galileo (Եվրոպա), GPS (ԱՄՆ), BeiDou (Չինաստան)</b>։</li>
+<li><b>RNSS</b> (Տարածաշրջանային նավիգացիոն արբանյակային համակարգ)՝ ինքնավար համակարգ տարածաշրջանային ծածկույթով․ օր․ <b>Հնդկաստանի IRNSS</b>։</li></ul></dd>
+<dt>Աստղագիտական</dt><dd>Տիեզերքում գտնվող աստղադիտակ, որը դիտում է առանց մթնոլորտի միջամտության։ Ուսումնասիրում են երկնային մարմիններն ու երևույթները՝ աստղերի ու մոլորակների մակերևույթների քարտեզներից մինչև պատկերներ։
+<ul><li><b>Կլիմայի հետազոտության արբանյակներ</b>՝ տվյալներ օվկիանոսների, սառույցների, ցամաքի, կենսոլորտի և մթնոլորտի մասին։</li>
+<li><b>Բիոարբանյակներ</b>՝ բուսական և կենդանական բջիջների ուսումնասիրություն տիեզերքում․ միջազգային համագործակցություն, բժշկության և կենսաբանության զարգացում։</li></ul></dd>
+</dl>`,
+    figs: [["l2-comsat","Կապի բեռ․ GEO արբանյակներ, որոնք վերահաղորդում են ազդանշանները"],["l2-passive","Պասիվ հեռազննում․ չափվում է Արեգակից արտացոլված ճառագայթումը"],["l2-active","Ակտիվ հեռազննում․ արբանյակն ինքն է արձակում ազդանշանը և ընդունում անդրադարձը"]] },
+  { h: "Դասակարգում ըստ օգտակար բեռի․ օրինակներ", html: `
+<table class="tbl"><thead><tr><th>Տեսակ</th><th>Օրինակներ</th></tr></thead><tbody>
+<tr><td><b>Կապ</b></td><td>Starlink, Inmarsat, Intelsat</td></tr>
+<tr><td><b>Երկրի դիտարկում</b></td><td>Sentinel-2, Landsat-9, Terra</td></tr>
+<tr><td><b>Տեղորոշում և ուղղորդում</b></td><td>GLONASS, GPS, BeiDou</td></tr>
+<tr><td><b>Գիտական</b></td><td>James Webb, Hubble, Planck</td></tr>
+<tr><td><b>Եղանակային և օդերևութաբանական</b></td><td>GOES-16, Meteosat, Himawari-9</td></tr>
+<tr><td><b>Տեխնոլոգիական ցուցադրություն</b></td><td>TechDemoSat, Pathfinder Technology Demonstrator, Innovative Satellite Technology Demonstration</td></tr>
+<tr><td><b>Միջմոլորակային հետազոտություն</b></td><td>Juno, Voyager 1, 2</td></tr>
+<tr><td><b>Ռազմական</b></td><td>MIL Sat</td></tr>
+</tbody></table>`,
+    figs: [["l2-payloads","Արբանյակների դասակարգումը ըստ օգտակար բեռի"]] },
+  { h: "Արբանյակի պլատֆորմը (Bus)", html: `
+<p><b>Կրող ենթահամակարգերը</b> (բասը) ապահովում են օգտակար բեռի աշխատանքը․</p>
+<table class="tbl"><thead><tr><th>Ենթահամակարգ</th><th>Անգլերեն</th><th>Հապավում</th></tr></thead><tbody>
+<tr><td>Ներդիր համակարգիչ</td><td>On Board Computer</td><td class="mono">OBC</td></tr>
+<tr><td>Էլեկտրաէներգիայի ենթահամակարգ</td><td>Electric Power Subsystem</td><td class="mono">EPS</td></tr>
+<tr><td>Դիրքորոշման որոշման և կառավարման ենթահամակարգ</td><td>Attitude Determination &amp; Control Subsystem</td><td class="mono">ADCS</td></tr>
+<tr><td>Կապի ենթահամակարգ</td><td>Communication Subsystem</td><td class="mono">Comm</td></tr>
+<tr><td>Ջերմային ենթահամակարգ</td><td>Thermal Subsystem</td><td class="mono">—</td></tr>
+<tr><td>Շարժիչային ենթահամակարգ</td><td>Propulsion Subsystem</td><td class="mono">—</td></tr>
+<tr><td>Կառուցվածքային ենթահամակարգ</td><td>Structure Subsystem</td><td class="mono">—</td></tr>
+</tbody></table>
+<div class="key"><b>Արբանյակի բեռնվածքը (Payload)</b> + <b>Բաս (Bus)</b> = <b>Արբանյակ (Satellite)</b></div>
+<p class="sup">ADCS-ը որոշում և պահում է արբանյակի կողմնորոշումը (օր․ ալեհավաքը դեպի Երկիր, պանելները դեպի Արեգակ), EPS-ը արտադրում (արևային պանելներ), կուտակում (մարտկոցներ) և բաշխում է էներգիան, OBC-ն կառավարում է բոլոր գործողությունները։</p>`,
+    figs: [["l2-bus","Bus-ի ենթահամակարգերը 1U CubeSat-ում․ Payload, ADCS, OBC, Comm, EPS, արևային պանելներ, ալեհավաք"]] },
+  { h: "CubeSat ստանդարտը և կառուցվածքի պահանջները", html: `
+<div class="key"><b>Տիեզերքը պատկանում է բոլորին, բայց ենթարկվում է շատ խիստ կանոնների։</b></div>
+<p>CubeSat-ի չափերը՝ <b>10 × 10 × 10 սմ</b>, զանգվածը՝ <b>1.3 կգ</b>։ CanSat-ը ըմպելիքի տուփի չափ է՝ բարձրությունը <b>12.2 սմ</b> (4.8″), տրամագիծը <b>6.62 սմ</b> (2.6″)։ Ձևաչափերը՝ 1U, 2U, 3U, 6U, 12U։</p>
+<h4>CubeSat ստանդարտ (About CubeSat Standard)</h4>
+<table class="tbl"><thead><tr><th>Տեսակ</th><th>Չափեր (մմ)</th><th>Միջին քաշ (կգ)</th></tr></thead><tbody>
+<tr><td class="mono">1U</td><td class="mono">100 × 100 × 113.5</td><td class="mono">0.118</td></tr>
+<tr><td class="mono">1.5U</td><td class="mono">100 × 100 × 170.2</td><td class="mono">0.142–0.25</td></tr>
+<tr><td class="mono">2U</td><td class="mono">100 × 100 × 227</td><td class="mono">0.220</td></tr>
+<tr><td class="mono">3U</td><td class="mono">100 × 100 × 340.5</td><td class="mono">0.352</td></tr>
+<tr><td class="mono">6U</td><td class="mono">100 × 226.3 × 366</td><td class="mono">0.916–1.94</td></tr>
+<tr><td class="mono">12U</td><td class="mono">226.3 × 226.3 × 366</td><td class="mono">1.84</td></tr>
+</tbody></table>
+<p class="note">Աղյուսակի «միջին քաշը» կառուցվածքի (շրջանակի) քաշն է, ոչ թե ամբողջ արբանյակի։</p>
+<h4>Ի՞նչ պայմանների պետք է դիմանա CubeSat-ի կառուցվածքը</h4>
+<ol><li><b>Մեխանիկական բեռներ</b> (Mechanical Loads)</li><li><b>Ջերմային կարգավորում</b> (Thermal Regulation)</li><li><b>Ճառագայթակայունություն</b> (Radiation Hardness)</li><li><b>Վակուումային համատեղելիություն</b> (Vacuum Compatibility)</li><li><b>Էլեկտրամագնիսական համատեղելիություն</b> (Electromagnetic Compatibility)</li><li><b>Ուղեծրային պայմաններ</b> (Orbital Conditions)</li><li><b>Բացման մեխանիզմներ</b> (Deployment Mechanisms)</li></ol>`,
+    figs: [["l2-cansat","CanSat-ի չափերը և CubeSat-ի ձևաչափերը (1U → 12U)"]] }
+  ]
+},
+{
+  id: 3, date: "30.09.2026", title: "Փոքր արբանյակների կառուցվածքը, տեխնոլոգիաների աստիճանները, արբանյակի ղեկավարումը",
+  sections: [
+  { h: "Փոքր արբանյակի տարրերը", html: `
+<p>1U CubeSat-ի բաղադրիչները՝ իրական արտադրանքի օրինակով (վերևից ներքև)․</p>
+<table class="tbl"><thead><tr><th>Տարր</th><th>Օրինակ</th></tr></thead><tbody>
+<tr><td><b>Ալեհավաք</b> (Antenna)</td><td>UHF դիպոլ, GOMSpace</td></tr>
+<tr><td><b>Կառուցվածք</b> (Structure)</td><td>ISIS 1U CubeSat շրջանակ</td></tr>
+<tr><td><b>Արևային պանելներ</b> (Solar Panels)</td><td>GOMSpace</td></tr>
+<tr><td><b>Էլեկտրասնուցում</b> (Electrical Power Supply)</td><td>NanoPower P31u, GOMSpace</td></tr>
+<tr><td><b>Թռիչքի կառավարման համակարգիչ</b> (Flight Control Computer)</td><td>NanoMind A712C, GOMSpace</td></tr>
+<tr><td><b>UHF հաղորդիչ-ընդունիչ</b> (Transceiver)</td><td>NanoCom U482C, GOMSpace</td></tr>
+<tr><td><b>Սպեկտրոմետր</b></td><td>Spectruino, MySpectral</td></tr>
+<tr><td><b>Օգտակար բեռ</b> (Payload)</td><td>Arduino-ի վրա հիմնված համակարգիչ և սենսորներ</td></tr>
+</tbody></table>
+<p>Գործածման եղանակները՝ <b>TD, SSI, Com, Edu, EO, SPI</b> (տես դասախոսություն 1), նպատակը՝ <b>Հայաստանի ապահովություն և անվտանգություն</b>։</p>`,
+    figs: [["l3-exploded","1U CubeSat-ի բաղադրիչները (բացված տեսք)"]] },
+  { h: "Արբանյակի տարրերը լայն իմաստով", html: `
+<p>Արբանյակը միայն սարքավորում չէ․ նրա «տարրերը» ներառում են՝</p>
+<div class="cmp">
+<div><ul><li>Տեխնոլոգիաներ</li><li>Hardware, Software</li><li>Մարդիկ և կազմակերպություններ</li><li>Օբյեկտներ (facilities)</li><li>Քաղաքականություն</li><li>Ծառայություն</li><li>Փաստաթղթեր</li><li>Օրենքներ</li></ul></div>
+<div><ul><li>Ստանդարտներ</li><li>Տիեզերական գիտություններ</li><li>Հաղորդակցություն</li><li>Լոգիստիկա</li><li>Երկրի դիտում</li><li>Արհեստական բանականություն (ԱԲ)</li><li>Կիբեռանվտանգություն</li></ul></div>
+</div>` },
+  { h: "Համակարգի նկարագրությունը և պահանջները", html: `
+<p><b>Համակարգի նկարագրությունը</b> լինում է․</p>
+<ul><li><b>Տրամաբանական</b> (հաջորդական),</li><li><b>Ֆիզիկական</b>,</li><li><b>Տեխնիկական</b>։</li></ul>
+<div class="key">Համակարգի և՛ տրամաբանական, և՛ ֆիզիկական նկարագրությունները ներառում են մի շարք հայտարարություններ, որոնք կոչվում են <b>պահանջներ</b>։</div>
+<div class="cmp">
+<div><h5>Բաղադրիչների ճարտարագիտություն<br>(Component Engineering)</h5><p>Որոշում է, թե <b>ի՞նչ կարող եմ անել</b> (what can be done)։</p></div>
+<div><h5>Արբանյակը որպես համակարգ ճարտարագիտություն<br>(Systems Engineering)</h5><p>Որոշում է, թե <b>ի՞նչ պետք է անել</b> (what should be)։</p></div>
+</div>
+<p>Համակարգի հիերարխիան՝ համակարգ → ենթահամակարգեր → հավաքույթներ → բաղադրիչներ → տեխնոլոգիաներ (տես դասախոսություն 1)։</p>`,
+    figs: [["l1-hierarchy","Տիեզերական արբանյակների համակարգի հիերարխիան"]] },
+  { h: "Տեխնոլոգիաների պատրաստվածության աստիճանները", html: `
+<ul><li><b>TRL 1–2</b>՝ հիմնարար հետազոտություն և տեխնոլոգիայի զարգացում,</li>
+<li><b>TRL 3–4</b>՝ գաղափարի ապացույց և լաբորատոր մակետ (breadboard),</li>
+<li><b>TRL 5–6</b>՝ տեխնոլոգիայի ցուցադրում,</li>
+<li><b>TRL 7</b>՝ տեխնոլոգիայի փորձարկում, ստուգում և վավերացում,</li>
+<li><b>TRL 8</b>՝ տեխնոլոգիայի փորձարկում համակարգի կազմում,</li>
+<li><b>TRL 9</b>՝ տեխնոլոգիայի հաջող օգտագործում տիեզերական միջավայրում։</li></ul>
+<div class="key">Առաքելությունները պահանջում են <b>TRL 9</b> տեխնոլոգիաներ, այսինքն՝ <b>թռիչքային որակավորում ունեցող բաղադրիչներ</b>։</div>`,
+    figs: [["l1-trl","TRL ջերմաչափ"]] },
+  { h: "Տեխնոլոգիաների տեսակները", html: `
+<dl>
+<dt>Ցածր տեխնոլոգիա</dt><dd>Գործընթաց կամ ապրանք, որը <b>չի պահանջում ծանր տեխնիկա</b>, չկան համակարգիչներ։</dd>
+<dt>Միջին տեխնոլոգիա</dt><dd>Գործընթաց կամ ապրանք, որը պահանջում է բարդ տեխնիկայի <b>որոշակի մակարդակ</b>, համակարգչային էլեկտրոնիկա։</dd>
+<dt>Բարձր տեխնոլոգիա</dt><dd>Գործընթաց կամ ապրանք, որը պահանջում է <b>բարձր մակարդակի տեխնիկա</b>, <b>վերջին տեխնոլոգիաների</b> օգտագործում և համակարգչային էլեկտրոնիկա։</dd>
+</dl>
+<h4>Ուրեմն տեխնոլոգիան…</h4>
+<ol><li>ծրագրվում է,</li><li>գնահատվում է,</li><li>ղեկավարվում է,</li><li>փոխանցվում է ու դառնում արտադրանք (product),</li><li>առևտրայնացվում է, արտադրանքի դիզայնի համար օգտագործվում է,</li><li>գնարժեքավորվում է,</li><li>ու դառնում համակարգի բաղադրիչի հիմնական մասը։</li></ol>` },
+  { h: "Նախագծի ղեկավարման ձևը", html: `
+<p>Ավիատիեզերական սարքաշինության նախագծի ղեկավարումը լինում է <b>երեք կողմանի</b>․</p>
+<dl>
+<dt>Գլխավոր գիտնական (Chief Scientist)</dt><dd>Որոշում է <b>առաքելության նպատակը</b> և ուսումնասիրության կարևորությունը, հաշվետու է <b>հովանավորին կամ նախագծի ֆինանսավորողին</b>։</dd>
+<dt>Ծրագրի ղեկավար (Project Manager)</dt><dd>Ղեկավարում է բոլոր <b>թասքերը, ժամկետները, բյուջեն, ռիսկերը</b>, հաշվետու է շահագրգիռ կողմերին, ներառյալ գլխավոր գիտնականին։</dd>
+<dt>Համակարգերի ճարտարագետ (Systems Engineer)</dt><dd>Պատասխանատու է <b>ինժեներատեխնիկական թիմի</b> համար, հաշվետու է ծրագրի ղեկավարին։</dd>
+</dl>
+<h4>Նախագծի շղթան</h4>
+<p><b>Հաճախորդ</b> (խնդիր դնողը կամ ունեցողը) → <b>Տեխնոլոգիա</b> (գլխավոր գիտնական) → <b>Համակարգ</b> (համակարգերի ճարտարագետ) → <b>Bus</b> (գլխավոր ինժեներ, Chief Engineer) + <b>Payload</b> (բեռի ինժեներ, Payload Engineer) → <b>Արբանյակ</b> (համակարգերի ճարտարագետ) → <b>Հրթիռ</b> (հրթիռի ճարտարագետ, Rocket Engineer)։ Ամբողջ շղթան ընդգրկում է <b>նախագծի ղեկավարը</b>։</p>`,
+    figs: [["l3-mgmt","Նախագծի ղեկավարման ձևը․ հաճախորդից մինչև հրթիռ"]] },
+  { h: "Տիեզերական նախագծի կառուցվածքը (WBS)", html: `
+<p><b>Տիեզերական թռիչքի նախագիծը (Space Flight Project)</b> բաժանվում է 11 տարրի․</p>
+<table class="tbl"><thead><tr><th>№</th><th>Տարր</th><th>Հայերեն</th></tr></thead><tbody>
+<tr><td class="mono">01</td><td>Project Management</td><td>Նախագծի ղեկավարում</td></tr>
+<tr><td class="mono">02</td><td>Systems Engineering</td><td>Համակարգային ճարտարագիտություն</td></tr>
+<tr><td class="mono">03</td><td>Safety and Mission Assurance</td><td>Անվտանգություն և առաքելության երաշխավորում</td></tr>
+<tr><td class="mono">04</td><td>Science / Technology</td><td>Գիտություն / տեխնոլոգիա</td></tr>
+<tr><td class="mono">05</td><td>Payloads</td><td>Օգտակար բեռներ</td></tr>
+<tr><td class="mono">06</td><td>Spacecraft</td><td>Տիեզերանավ</td></tr>
+<tr><td class="mono">07</td><td>Mission Operations</td><td>Առաքելության գործողություններ</td></tr>
+<tr><td class="mono">08</td><td>Launch Vehicle / Services</td><td>Արձակման հրթիռ / ծառայություններ</td></tr>
+<tr><td class="mono">09</td><td>Ground Systems</td><td>Վերգետնյա համակարգեր</td></tr>
+<tr><td class="mono">10</td><td>Systems Integration and Testing</td><td>Համակարգերի ինտեգրում և փորձարկում</td></tr>
+<tr><td class="mono">11</td><td>Education and Public Outreach</td><td>Կրթություն և հանրային իրազեկում</td></tr>
+</tbody></table>
+<p class="sup">Նման ծառանման բաժանումը կոչվում է աշխատանքների կառուցվածքային բաժանում (WBS, Work Breakdown Structure)։</p>`,
+    figs: [["l3-wbs","Տիեզերական թռիչքի նախագծի կառուցվածքը (01–11)"]] },
+  { h: "Նախագծի կյանքի ցիկլի փուլերը", html: `
+<h4>Ընդհանուր համակարգերի զարգացման կյանքի ցիկլի մոդել</h4>
+<p><b>Հետազոտություն</b> (Exploratory Research) → <b>Հայեցակարգ</b> (Concept) → <b>Զարգացում</b> (Development) → <b>Արտադրում</b> (Production) → <b>Օգտագործում</b> (Utilization) → <b>Աջակցում</b> (Support) → <b>Մեկուսացում</b> (Retirement)։</p>
+<ul><li>Փուլերը <b>փոխկապակցված</b> են։</li><li>Կախված նախագծի չափից և բարդությունից՝ փուլերը կարող են <b>համակցվել կամ համընկնել</b>։</li></ul>
+<h4>Տիեզերական նախագծի փուլերը</h4>
+<table class="tbl"><thead><tr><th>Փուլ</th><th>Անվանում</th><th>Մաս</th></tr></thead><tbody>
+<tr><td class="mono"><b>Pre-Phase A</b></td><td>Հայեցակարգի ուսումնասիրություն (Concept Studies)</td><td>Նախաձևակերպում (Pre-Formulation)</td></tr>
+<tr><td class="mono"><b>Phase A</b></td><td>Հայեցակարգի և տեխնոլոգիայի զարգացում (Concept and Technology Development)</td><td rowspan="2">Ձևակերպում (Formulation)</td></tr>
+<tr><td class="mono"><b>Phase B</b></td><td>Նախնական նախագծում և տեխնոլոգիայի ավարտ (Preliminary Design and Technology Completion)</td></tr>
+<tr><td class="mono"><b>Phase C</b></td><td>Վերջնական ձևավորում և պատրաստում (Final Design and Fabrication)</td><td rowspan="2">Իրականացում (Implementation)</td></tr>
+<tr><td class="mono"><b>Phase D</b></td><td>Համակարգի հավաքում, ինտեգրում և փորձարկում, արձակում (System Assembly, Integration and Test, Launch)</td></tr>
+<tr><td class="mono"><b>Phase E</b></td><td>Գործարկում և պահպանում (Operations and Sustainment)</td><td rowspan="2">Օգտագործում, աջակցում և մեկուսացում (Utilization, Support &amp; Retirement)</td></tr>
+<tr><td class="mono"><b>Phase F</b></td><td>Փակում (Closeout)</td></tr>
+</tbody></table>`,
+    figs: [["l3-stairs","Համակարգերի զարգացման կյանքի ցիկլի ընդհանուր մոդել"],["l3-lifecycle","Space Project Life Cycle․ Pre-Phase A → Phase F, KDP A–F"]] },
+  { h: "Վերանայումներ և որոշման կետեր", html: `
+<table class="tbl"><thead><tr><th>Հապավում</th><th>Անգլերեն</th><th>Հայերեն</th></tr></thead><tbody>
+<tr><td class="mono"><b>KDP</b></td><td>Key Decision Point</td><td>Հիմնական որոշման կետ</td></tr>
+<tr><td class="mono"><b>MCR</b></td><td>Mission Concept Review</td><td>Առաքելության հայեցակարգի վերանայում</td></tr>
+<tr><td class="mono"><b>SRR</b></td><td>System Requirement Review</td><td>Համակարգի պահանջների վերանայում</td></tr>
+<tr><td class="mono"><b>SDR</b></td><td>System Design Review</td><td>Համակարգի դիզայնի վերանայում</td></tr>
+<tr><td class="mono"><b>PDR</b></td><td>Preliminary Design Review</td><td>Նախնական դիզայնի վերանայում</td></tr>
+<tr><td class="mono"><b>CDR</b></td><td>Critical Design Review</td><td>Մանրամասն (քննադատական) դիզայնի վերանայում</td></tr>
+<tr><td class="mono"><b>SIR</b></td><td>System Integration Review</td><td>Համակարգի ինտեգրման վերանայում</td></tr>
+<tr><td class="mono"><b>ORR</b></td><td>Operation Readiness Review</td><td>Գործառնական պատրաստության վերանայում</td></tr>
+<tr><td class="mono"><b>DRR</b></td><td>Disposal Readiness Review</td><td>Հեռացման պատրաստության վերանայում</td></tr>
+<tr><td class="mono"><b>DR</b></td><td>Decommissioning Review</td><td>Շահագործումից հանելու վերանայում</td></tr>
+</tbody></table>
+<h4>Վերանայումների հերթականությունը կյանքի ցիկլում</h4>
+<ul><li><b>Pre-Phase A</b>՝ MCR → <b>KDP A</b></li>
+<li><b>Phase A</b>՝ SRR, SDR (MDR) → <b>KDP B</b></li>
+<li><b>Phase B</b>՝ PDR → <b>KDP C</b>՝ հաստատման վերանայում (confirmation review), <b>նախագծի մեկնարկ</b></li>
+<li><b>Phase C</b>՝ CDR → <b>KDP D</b></li>
+<li><b>Phase D</b>՝ SIR, ORR, արձակում (Launch) → <b>KDP E</b></li>
+<li><b>Phase E/F</b>՝ DRR, DR → <b>KDP F</b></li></ul>
+<p>Ձևակերպման (Formulation) մասը ավարտվում է KDP C-ով, որից հետո սկսվում է Իրականացումը (Implementation)։</p>`,
+    figs: [["l3-reviews","Նախագծի և համակարգի կյանքի ցիկլի մոդելն ու վերանայումները"]] },
+  { h: "Տիեզերական համակարգի տարրերը", html: `
+<p><b>Ո՞րն է ավիատիեզերական ղեկավարման համակարգը</b>․ «Տիեզերական համակարգի» կենտրոնական տարրը կապված է հետևյալ բաղադրիչների հետ․</p>
+<ul><li><b>Նպատակ</b> (առաքելության օբյեկտը, օր․ անտառ, միջավայր),</li>
+<li><b>Ուղեծրեր</b>,</li>
+<li><b>Տիեզերանավ կամ արբանյակ</b>,</li>
+<li><b>Երկրային (վերգետնյա) կայաններ</b>՝ կապի ցանց (Communication Network), հրամանատարություն և կառավարում (Command and Control),</li>
+<li><b>Տրանսպորտացիա</b> (արձակման հրթիռ),</li>
+<li><b>Առաքելության կառավարման սենյակ</b> (կառավարման կենտրոն),</li>
+<li><b>Տվյալների բաշխում</b>՝ արձագանքման ժամանակ (Response Time) և տվյալների տարածում (Data Distribution)։</li></ul>`,
+    figs: [["l3-ground","Տիեզերական համակարգը և դրա տարրերը"]] }
+  ]
+}
+],
+
+// Written questions by lecture
+questions: [
+ { id: "1.1", sec: [0], t: 1, l: 1, q: "Ինչ է արբանյակը։ Բնական և արհեստական արբանյակներ", a: `
+<ul><li>Արբանյակը տիեզերքում գտնվող օբյեկտ է, որը պտտվում է ավելի մեծ օբյեկտի շուրջ։</li>
+<li>Բնական՝ լուսիններ մոլորակի կամ աստղի շուրջ․ բոլոր մոլորակներն ունեն, բացի Մերկուրիից և Վեներայից։</li>
+<li>Արհեստական՝ անօդաչու սարքեր կամ կառավարվող ռոբոտներ։</li>
+<li>Առաջինը՝ Sputnik 1, արձակվել է 1957 թ. հոկտեմբերի 4-ին։</li>
+<li>Արբանյակաշինությունը պահանջում է համակարգված մոտեցում։</li></ul>` },
+ { id: "1.2", sec: [1], t: 1, l: 1, q: "Տիեզերական ճարտարագիտություն։ Spacecraft Engineering և Space Engineering տարբերությունը", a: `
+<ul><li>Բազմամասնագիտական ոլորտ՝ արբանյակներ, տիեզերանավեր, ինքնաթիռներ, որոնք գործում են մթնոլորտից դուրս․ համակարգերի նախագծում, զարգացում, շահագործում։</li>
+<li>Spacecraft Engineering՝ տիեզերական մեքենայի նախագծում, կառուցում, փորձարկում, շահագործում սկզբից մինչև վերջ․ ենթահամակարգերի ինժեներություն և կյանքի ցիկլ։</li>
+<li>Space Engineering՝ ամբողջական տիեզերական համակարգի ճարտարապետություն․ հրթիռի ընտրություն, վերգետնյա կառավարում, ուղեծրեր և համաստեղություններ, օգտակար բեռներ, առաքելության գործողություններ։</li>
+<li>Առաքելությունների տեսականին՝ արձակման հրթիռներ, Երկիր, մարդը տիեզերքում, Արեգակնային համակարգ, տիեզերք, ISS։</li></ul>` },
+ { id: "1.3", sec: [2], t: 1, l: 1, q: "Փոքր արբանյակների դասակարգումն ըստ զանգվածի և ծավալի (U)", a: `
+<ul><li>1U = 10×10×10 սմ․ 3U ≈ 30 սմ (Juno-ն ≈ 20 մ)։</li>
+<li>Պիկո՝ 0.1–1 կգ (1U), նանո՝ 1–10 կգ (3U, 6U), միկրո՝ 10–100 կգ (12U), մինի՝ 100–500 կգ։</li>
+<li>Փոքր արբանյակներ՝ մինչև 500 կգ։</li>
+<li>Ձևաչափեր՝ 1U, CanSat, 0.5U, 0.25U, 5×5×5 սմ։</li>
+<li>Մեծ տիեզերանավեր՝ Voyager, New Horizons (&lt;1000 կգ), Juno (&lt;5000 կգ), Cassini, Hubble (&lt;10 000 կգ)։</li></ul>` },
+ { id: "1.4", sec: [3,6], t: 1, l: 1, q: "CubeSat-ը և դրա ձևաչափերը։ Հիմնադիրները և արդյունաբերության կարիքները", a: `
+<ul><li>CubeSat-ը փոքր արբանյակ է՝ 1U խորանարդ միավորներից։</li>
+<li>Հիմնադիրներ՝ Earnest Robinson, Henry Helvajian, Bob Twiggs, Jordi Puig-Suari։</li>
+<li>Ձևաչափեր՝ 12U (Aoxiang Zhixing), 6U (EcAMSat, ALTAIR 1), 2U (ION), 1.5U (FIREBIRD), 0.5U (AeroCube 6), 0.25U (Space Bee), CanSat։</li>
+<li>Արբանյակ = բաս + օգտակար բեռ։</li></ul>` },
+ { id: "1.5", sec: [4], t: 1, l: 1, q: "Համակարգի սահմանումը (INCOSE) և տիեզերական համակարգի հիերարխիան", a: `
+<ul><li>Համակարգը փոխազդող տարրերի համակցություն է, կազմակերպված մեկ կամ մի քանի նշված նպատակներին հասնելու համար (INCOSE SE Handbook V3.2)։</li>
+<li>Հիերարխիա՝ համակարգ → ենթահամակարգեր → հավաքույթներ (assemblies) → բաղադրիչներ → տեխնոլոգիաներ։</li>
+<li>Յուրաքանչյուր մակարդակ ներառված է վերինի մեջ։</li></ul>` },
+ { id: "1.6", sec: [5], t: 1, l: 1, q: "Փոքր արբանյակների առաքելության նպատակները (գործածման եղանակները)", a: `
+<ul><li>TD՝ տեխնոլոգիայի ցուցադրում։</li>
+<li>SSI՝ տիեզերական գիտությունների ուսումնասիրություն։</li>
+<li>Com՝ հաղորդակցություն, Edu՝ ուսումնական։</li>
+<li>EO՝ Երկրի դիտում, SPI՝ մոլորակային գիտություն և հետախուզում։</li>
+<li>Նպատակը՝ Հայաստանի ապահովություն և անվտանգություն։</li></ul>` },
+ { id: "1.7", sec: [6], t: 1, l: 1, q: "Արբանյակի բասը։ Բասի ընտրությունը և կայունացման եղանակները", a: `
+<ul><li>Արբանյակ = Bus + Payload․ բասը՝ ADCS, OBC, Comm, EPS, արևային պանելներ, ալեհավաք։</li>
+<li>Պտտման առանցքով կայունացված (Spin Axis Stabilized) բաս՝ կողմնորոշումը պահում է պտույտը։</li>
+<li>Եռառանցք կայունացված (Cassini)՝ շարժիչներ (thrusters) և ռեակցիոն անիվներ։</li></ul>` },
+ { id: "1.8", sec: [7], t: 1, l: 1, q: "Տեխնոլոգիական պատրաստվածության մակարդակները (TRL 1–9)", a: `
+<ul><li>TRL 1–2՝ հիմնարար հետազոտություն և տեխնոլոգիայի զարգացում։</li>
+<li>TRL 3–4՝ գաղափարի ապացույց և լաբորատոր մակետ։</li>
+<li>TRL 5–6՝ տեխնոլոգիայի ցուցադրում (ալֆա նախատիպ համապատասխան միջավայրում)։</li>
+<li>TRL 7՝ փորձարկում, ստուգում և վավերացում (բետա նախատիպ գործառնական միջավայրում)։</li>
+<li>TRL 8՝ փորձարկում համակարգի կազմում (որակավորված), TRL 9՝ հաջող կիրառում տիեզերքում (սերտիֆիկացված)։</li>
+<li>CubeSat առաքելությունները պահանջում են TRL 9՝ թռիչքային որակավորմամբ բաղադրիչներ։</li></ul>` },
+ { id: "2.1", sec: [1], t: 2, l: 2, q: "Վերգետնյա, օդային և տիեզերական դիտարկման հարթակները և դրանց բարձրությունները", a: `
+<ul><li>Օդային համակարգեր՝ դրոններ, անօդաչու ինքնաթիռներ, պարապլաններ, ուղղաթիռներ, ինքնաթիռներ։</li>
+<li>Դրոն ≈ 150 մ, օդային հեռուստատեսություն 0.3 կմ, օդային լուսանկարահանում 1.2–3.5 կմ, օդային SAR 10–12 կմ։</li>
+<li>Space Shuttle 185–575 կմ, արբանյակ (օպտիկական սենսոր/SAR) 700–900 կմ։</li></ul>` },
+ { id: "2.2", sec: [2], t: 2, l: 2, q: "Հաղորդակցության և կառավարման կապերը (դաշտ, UAV, արբանյակ, վերգետնյա կայան)", a: `
+<ul><li>Մասեր՝ (A) դաշտ, (B) UAV ցանց, (C) արբանյակային կառավարման համակարգ, (D) վերգետնյա կառավարման կայան։</li>
+<li>Հաղորդակցության կապեր՝ UAV ↔ UAV, UAV ↔ դաշտ, ներքին կապ սենսորային դաշտում։</li>
+<li>Կառավարման կապեր՝ UAV ↔ UAV, UAV ↔ CS, արբանյակ ↔ UAV-ներ և CS։</li>
+<li>Կայանի գործառույթներ՝ դաշտի տվյալներ, UAV-ների կառավարում, սպասարկում․ Քարմանի գիծը բաժանում է օդայինը տիեզերականից։</li></ul>` },
+ { id: "2.3", sec: [3], t: 2, l: 2, q: "Տիեզերական միջավայրը և դրա ազդեցությունը արբանյակի վրա", a: `
+<ul><li>Ճառագայթում և լիցքավորված մասնիկներ։</li>
+<li>Ձգողականություն, մթնոլորտ (դիմադրություն), վակուում։</li>
+<li>Ջերմաստիճան (մեծ տարբերություններ)։</li>
+<li>Միկրոմետեորիտներ և տիեզերական աղբ։</li>
+<li>Կյանքն ու աշխատանքը տիեզերքում։</li></ul>` },
+ { id: "2.4", sec: [4], t: 2, l: 2, q: "Մթնոլորտի շերտերը։ Որտեղից է սկսվում տիեզերքը", a: `
+<ul><li>Տրոպոսֆերա 0–10(12) կմ՝ T-ն նվազում է, օդը նոսրանում է։</li>
+<li>Ստրատոսֆերա մինչև 50 կմ՝ տաք, օզոնային շերտ։</li>
+<li>Մեզոսֆերա մինչև 85 կմ՝ ցուրտ, −90 °C։</li>
+<li>Թերմոսֆերա 85 → 500–1000 կմ՝ 1500 °C, շատ ցածր խտություն, ISS, բևեռափայլ, իոնոսֆերա։</li>
+<li>Էկզոսֆերա 1000 → ~10 000 կմ՝ ջրածին և հելիում։</li>
+<li>Տիեզերքը սկսվում է Քարմանի գծից՝ ≈ 100 կմ (62 մղոն)։</li></ul>` },
+ { id: "2.5", sec: [5], t: 2, l: 2, q: "Հիմնական ֆիզիկական մեծություններ․ զանգված, իներցիա, քաշ, էներգիա, իմպուլս", a: `
+<ul><li>Զանգված՝ որքան նյութ ունի մարմինը։</li>
+<li>Իներցիա՝ որքան դժվար է մարմինը տեղափոխել։</li>
+<li>Քաշ՝ ձգողականության ազդեցությունը զանգվածի վրա։</li>
+<li>Էներգիա՝ պոտենցիալ և կինետիկ։</li>
+<li>Գծային իմպուլս = զանգված × արագություն․ անկյունային իմպուլսը պտտվող հատկությունների չափանիշն է։</li></ul>` },
+ { id: "2.6", sec: [6], t: 2, l: 2, q: "LEO և MEO ուղեծրերը", a: `
+<ul><li>LEO՝ 160–1500 կմ, պարբերություն 90–120 րոպե, օրական մինչև 16 պտույտ։</li>
+<li>LEO-ն հարմար է հեռազննման, Երկրի դիտարկման, գիտական հետազոտությունների համար՝ տվյալները արագ են ստացվում։</li>
+<li>LEO օպերատորներ՝ Iridium, Globalstar, Orbcomm․ տասնյակ-հարյուրավոր արբանյակներ՝ mesh ցանց։</li>
+<li>MEO՝ 5000–20 000 կմ, նավիգացիա՝ GPS, GLONASS, Galileo (GNSS)։</li></ul>` },
+ { id: "2.7", sec: [6], t: 2, l: 2, q: "GEO, GTO և SSO ուղեծրերը", a: `
+<ul><li>GEO՝ 35 786 կմ, ճշգրիտ հասարակածի վերևում․ 3 հավասարաչափ արբանյակը ծածկում է գրեթե ամբողջ աշխարհը (Inmarsat, Eutelsat, Astra)։</li>
+<li>GTO՝ փոխանցման ուղեծիր դեպի GEO․ հրթիռը թողնում է արբանյակը GTO-ում, արբանյակի շարժիչը հասցնում է GEO և կարգավորում թեքությունը։</li>
+<li>SSO՝ 600–800 կմ, հյուսիս–հարավ բևեռներով, անցնում է տրված վայրով նույն տեղական արեգակնային ժամին → նույն լուսավորություն, իդեալական Երկրի դիտարկման համար։</li>
+<li>Գեոստացիոնար՝ հասարակածային, գեոսինխրոն՝ նույն պարբերությամբ, բայց թեքված։ Որքան բարձր, այնքան մեծ ծածկույթ։</li></ul>` },
+ { id: "2.8", sec: [7], t: 2, l: 2, q: "Ճառագայթումը (Վան Ալլենի գոտիներ, SAA) և ուղեծրային խանգարումները", a: `
+<ul><li>Վան Ալլենի ներքին գոտի՝ 1000–13 000 կմ, բարձր էներգիայի պրոտոններ։</li>
+<li>Հարավատլանտյան անոմալիա (SAA)՝ 200–800 կմ․ նաև Արեգակնային ճառագայթում։</li>
+<li>Խանգարումը փոքր ուժ է, որը շեղում է արբանյակը իդեալական ուղեծրից։</li>
+<li>Տեսակներ՝ մթնոլորտային դիմադրություն, Երկրի փքվածություն, Լուսնի և Արեգակի ձգողություն, մագնիսական դաշտի փոխազդեցություն։</li>
+<li>600 կմ-ից ցածր արբանյակները հակված են անկման (դիմադրություն)․ Արեգակնային ակտիվությունն ազդում է կյանքի տևողության վրա։</li></ul>` },
+ { id: "2.9", sec: [8,10], t: 2, l: 2, q: "Արբանյակների չորս տեսակները ըստ կիրառման և օրինակներ", a: `
+<ul><li>Կապի՝ GEO-ում, ընդունում և վերահաղորդում են ազդանշաններ (ռադիո, TV, հեռախոս, ինտերնետ)․ Starlink, Inmarsat, Intelsat։</li>
+<li>Երկրի դիտարկման՝ վերահսկում են մոլորակը և հաղորդում փոփոխությունների մասին․ Sentinel-2, Landsat-9, Terra։</li>
+<li>Նավիգացիոն՝ 20 000–37 000 կմ, ժամանակ, դիրք, վիճակ․ GPS, GLONASS, BeiDou։</li>
+<li>Աստղագիտական՝ աստղադիտակներ առանց մթնոլորտի միջամտության, ինֆրակարմիր պատկերում․ James Webb, Hubble, Planck։</li>
+<li>Նաև՝ եղանակային (GOES-16, Meteosat), տեխնոլոգիական ցուցադրություն (TechDemoSat), միջմոլորակային (Juno, Voyager)։</li></ul>` },
+ { id: "2.10", sec: [9], t: 2, l: 2, q: "Օգտակար բեռը․ կապի բեռ և հեռազննում (պասիվ և ակտիվ)", a: `
+<ul><li>Կապի բեռ՝ GEO, տրանսպոնդերներ (ռադիոալիքների ընդունիչ + հաղորդիչ)։</li>
+<li>Հեռազննում՝ միջավայրի մոնիթորինգ, քարտեզագրում․ ուղեծրեր՝ բևեռային, շրջանաձև, GEO։</li>
+<li>Պասիվ՝ բազմասպեկտրային/հիպերսպեկտրային սենսորներ, տեսանելի, IR, մոտ IR, ջերմային IR, միկրոալիքային։</li>
+<li>Ակտիվ՝ ինքն է արձակում ազդանշան և չափում անդրադարձը․ ռադար, լիդար, լազերային բարձրաչափ, զոնդեր, սկատերոմետր։</li>
+<li>Եղանակային արբանյակներ՝ իրական ժամանակի տվյալներ, GEO-ն իդեալական է։</li></ul>` },
+ { id: "2.11", sec: [9], t: 2, l: 2, q: "Նավիգացիոն և աստղագիտական բեռներ։ GNSS և RNSS", a: `
+<ul><li>Նավիգացիա՝ 20 000–37 000 կմ, ազդանշաններ՝ ճշգրիտ ժամանակ, դիրք, տեխնիկական վիճակ։</li>
+<li>GNSS՝ գլոբալ ծածկույթ․ Galileo (Եվրոպա), GPS (ԱՄՆ), BeiDou (Չինաստան)։</li>
+<li>RNSS՝ տարածաշրջանային ինքնավար համակարգ․ Հնդկաստանի IRNSS։</li>
+<li>Աստղագիտական՝ դիտում առանց մթնոլորտի, քարտեզներ և պատկերներ։</li>
+<li>Կլիմայի արբանյակներ (օվկիանոս, սառույց, ցամաք, կենսոլորտ, մթնոլորտ) և բիոարբանյակներ (բջիջներ, բժշկություն, կենսաբանություն)։</li></ul>` },
+ { id: "2.12", sec: [11], t: 2, l: 2, q: "Արբանյակի պլատֆորմը (Bus) և դրա ենթահամակարգերը", a: `
+<ul><li>OBC՝ ներդիր համակարգիչ։</li>
+<li>EPS՝ էլեկտրաէներգիայի ենթահամակարգ։</li>
+<li>ADCS՝ դիրքորոշման որոշում և կառավարում։</li>
+<li>Comm՝ կապի ենթահամակարգ։</li>
+<li>Ջերմային, շարժիչային, կառուցվածքային ենթահամակարգեր։</li>
+<li>Payload + Bus = Satellite։</li></ul>` },
+ { id: "2.13", sec: [12], t: 2, l: 2, q: "CubeSat ստանդարտը։ Ինչ պայմանների պետք է դիմանա CubeSat-ի կառուցվածքը", a: `
+<ul><li>Տիեզերքը պատկանում է բոլորին, բայց ենթարկվում է խիստ կանոնների։</li>
+<li>CubeSat՝ 10×10×10 սմ, 1.3 կգ․ 1U՝ 100×100×113.5 մմ, 3U՝ 100×100×340.5 մմ, 6U՝ 100×226.3×366, 12U՝ 226.3×226.3×366 մմ։</li>
+<li>CanSat՝ տուփ 12.2 սմ բարձրությամբ, 6.62 սմ տրամագծով։</li>
+<li>Պայմաններ՝ մեխանիկական բեռներ, ջերմային կարգավորում, ճառագայթակայունություն, վակուումային համատեղելիություն։</li>
+<li>Նաև՝ էլեկտրամագնիսական համատեղելիություն, ուղեծրային պայմաններ, բացման մեխանիզմներ։</li></ul>` },
+ { id: "3.1", sec: [0,1], t: 3, l: 3, q: "Փոքր արբանյակի տարրերը (1U CubeSat-ի օրինակով) և արբանյակի տարրերը լայն իմաստով", a: `
+<ul><li>Ալեհավաք (UHF դիպոլ), կառուցվածք (ISIS 1U շրջանակ), արևային պանելներ։</li>
+<li>Էլեկտրասնուցում (NanoPower P31u), թռիչքի կառավարման համակարգիչ (NanoMind A712C), UHF հաղորդիչ-ընդունիչ (NanoCom U482C)։</li>
+<li>Սպեկտրոմետր և օգտակար բեռ (Arduino համակարգիչ և սենսորներ)։</li>
+<li>Լայն իմաստով՝ տեխնոլոգիաներ, hardware/software, մարդիկ և կազմակերպություններ, օբյեկտներ, քաղաքականություն, ծառայություն, փաստաթղթեր, օրենքներ։</li>
+<li>Նաև՝ ստանդարտներ, տիեզերական գիտություններ, հաղորդակցություն, լոգիստիկա, Երկրի դիտում, ԱԲ, կիբեռանվտանգություն։</li></ul>` },
+ { id: "3.2", sec: [2], t: 3, l: 3, q: "Համակարգի նկարագրությունը և պահանջները։ Բաղադրիչների և համակարգային ճարտարագիտության տարբերությունը", a: `
+<ul><li>Նկարագրություն՝ տրամաբանական (հաջորդական), ֆիզիկական, տեխնիկական։</li>
+<li>Տրամաբանական և ֆիզիկական նկարագրությունների հայտարարությունները կոչվում են պահանջներ։</li>
+<li>Բաղադրիչների ճարտարագիտություն՝ «ի՞նչ կարող եմ անել» (what can be done)։</li>
+<li>Համակարգային ճարտարագիտություն՝ «ի՞նչ պետք է անել» (what should be)։</li></ul>` },
+ { id: "3.3", sec: [4], t: 3, l: 3, q: "Տեխնոլոգիաների տեսակները և տեխնոլոգիայի ճանապարհը մինչև համակարգի բաղադրիչ", a: `
+<ul><li>Ցածր տեխնոլոգիա՝ չի պահանջում ծանր տեխնիկա, չկան համակարգիչներ։</li>
+<li>Միջին՝ բարդ տեխնիկայի որոշակի մակարդակ, համակարգչային էլեկտրոնիկա։</li>
+<li>Բարձր՝ բարձր մակարդակի տեխնիկա, վերջին տեխնոլոգիաներ, համակարգչային էլեկտրոնիկա։</li>
+<li>Տեխնոլոգիան ծրագրվում, գնահատվում, ղեկավարվում, փոխանցվում և դառնում արտադրանք։</li>
+<li>Առևտրայնացվում, գնարժեքավորվում և դառնում համակարգի բաղադրիչի հիմնական մասը։</li></ul>` },
+ { id: "3.4", sec: [5], t: 3, l: 3, q: "Ավիատիեզերական նախագծի ղեկավարման երեք կողմերը և դերերը", a: `
+<ul><li>Գլխավոր գիտնական՝ որոշում է առաքելության նպատակը և կարևորությունը, հաշվետու է հովանավորին/ֆինանսավորողին։</li>
+<li>Ծրագրի ղեկավար՝ թասքեր, ժամկետներ, բյուջե, ռիսկեր, հաշվետու է շահագրգիռ կողմերին (ներառյալ գլխավոր գիտնականին)։</li>
+<li>Համակարգերի ճարտարագետ՝ պատասխանատու է ինժեներական թիմի համար, հաշվետու է ծրագրի ղեկավարին։</li>
+<li>Շղթա՝ հաճախորդ → տեխնոլոգիա → համակարգ → Bus (գլխավոր ինժեներ) + Payload (բեռի ինժեներ) → արբանյակ → հրթիռ (հրթիռի ինժեներ)։</li></ul>` },
+ { id: "3.5", sec: [6], t: 3, l: 3, q: "Տիեզերական թռիչքի նախագծի կառուցվածքը (01–11)", a: `
+<ul><li>01 նախագծի ղեկավարում, 02 համակարգային ճարտարագիտություն, 03 անվտանգություն և առաքելության երաշխավորում։</li>
+<li>04 գիտություն/տեխնոլոգիա, 05 օգտակար բեռներ, 06 տիեզերանավ, 07 առաքելության գործողություններ։</li>
+<li>08 արձակման հրթիռ/ծառայություններ, 09 վերգետնյա համակարգեր։</li>
+<li>10 համակարգերի ինտեգրում և փորձարկում, 11 կրթություն և հանրային իրազեկում։</li></ul>` },
+ { id: "3.6", sec: [7], t: 3, l: 3, q: "Նախագծի կյանքի ցիկլի փուլերը (Pre-Phase A – Phase F)", a: `
+<ul><li>Ընդհանուր մոդել՝ հետազոտություն → հայեցակարգ → զարգացում → արտադրում → օգտագործում → աջակցում → մեկուսացում․ փուլերը փոխկապակցված են, կարող են համակցվել կամ համընկնել։</li>
+<li>Pre-Phase A՝ հայեցակարգի ուսումնասիրություն (նախաձևակերպում)։</li>
+<li>Phase A՝ հայեցակարգի և տեխնոլոգիայի զարգացում, Phase B՝ նախնական նախագծում (ձևակերպում)։</li>
+<li>Phase C՝ վերջնական ձևավորում և պատրաստում, Phase D՝ հավաքում, ինտեգրում, փորձարկում, արձակում (իրականացում)։</li>
+<li>Phase E՝ գործարկում և պահպանում, Phase F՝ փակում։</li></ul>` },
+ { id: "3.7", sec: [8], t: 3, l: 3, q: "Հիմնական վերանայումները (MCR … DR) և որոշման կետերը (KDP)", a: `
+<ul><li>KDP՝ հիմնական որոշման կետ, յուրաքանչյուր փուլից հետո (KDP A–F)։</li>
+<li>MCR՝ հայեցակարգ, SRR՝ պահանջներ, SDR՝ համակարգի դիզայն։</li>
+<li>PDR՝ նախնական դիզայն, CDR՝ մանրամասն (քննադատական) դիզայն, SIR՝ ինտեգրում։</li>
+<li>ORR՝ գործառնական պատրաստություն, DRR՝ հեռացման պատրաստություն, DR՝ շահագործումից հանում։</li>
+<li>KDP C-ն հաստատման վերանայումն է՝ նախագծի մեկնարկ, ձևակերպումից անցում իրականացման։</li></ul>` },
+ { id: "3.8", sec: [9], t: 3, l: 3, q: "Տիեզերական համակարգի տարրերը (ավիատիեզերական ղեկավարման համակարգ)", a: `
+<ul><li>Նպատակ (առաքելության օբյեկտ)։</li>
+<li>Ուղեծրեր և տիեզերանավ/արբանյակ։</li>
+<li>Վերգետնյա կայաններ՝ կապի ցանց, հրամանատարություն և կառավարում։</li>
+<li>Տրանսպորտացիա (արձակում) և առաքելության կառավարման սենյակ։</li>
+<li>Տվյալների բաշխում՝ արձագանքման ժամանակ։</li></ul>` }
+],
+
+cards: [
+ [1,"Արբանյակ","Տիեզերքում գտնվող օբյեկտ, որը պտտվում է ավելի մեծ օբյեկտի շուրջ"],
+ [1,"Sputnik 1","Առաջին արհեստական արբանյակը, արձակվել է 1957 թ. հոկտեմբերի 4-ին"],
+ [1,"Մոլորակներ առանց բնական արբանյակի","Մերկուրի և Վեներա"],
+ [1,"Spacecraft Engineering","Տիեզերական մեքենայի նախագծում, կառուցում, փորձարկում, շահագործում սկզբից մինչև վերջ, ենթահամակարգերի ինժեներություն"],
+ [1,"Space Engineering","Ամբողջական տիեզերական համակարգի ճարտարապետական զարգացում՝ հրթիռ, վերգետնյա կառավարում, ուղեծրեր, բեռներ, գործողություններ"],
+ [1,"1U CubeSat","10 × 10 × 10 սմ խորանարդ միավոր"],
+ [1,"Պիկոարբանյակ","0.1–1 կգ (1U CubeSat)"],
+ [1,"Նանոարբանյակ","1–10 կգ (3U, 6U CubeSat)"],
+ [1,"Միկրոարբանյակ","10–100 կգ (12U CubeSat)"],
+ [1,"Մինիարբանյակ","100–500 կգ"],
+ [1,"Փոքր արբանյակ","Մինչև 500 կգ զանգվածով արբանյակ"],
+ [1,"CubeSat-ի հիմնադիրներ","Earnest Robinson, Henry Helvajian, Bob Twiggs, Jordi Puig-Suari"],
+ [1,"Համակարգ (INCOSE)","Փոխազդող տարրերի համակցություն, կազմակերպված մեկ կամ մի քանի նշված նպատակներին հասնելու համար"],
+ [1,"Համակարգի հիերարխիա","Համակարգ → ենթահամակարգեր → հավաքույթներ → բաղադրիչներ → տեխնոլոգիաներ"],
+ [1,"TD","Տեխնոլոգիայի ցուցադրում (Technology Demonstration)"],
+ [1,"SSI","Տիեզերական գիտությունների ուսումնասիրություն"],
+ [1,"EO","Երկրի դիտում (Earth Observation)"],
+ [1,"SPI","Մոլորակային գիտություն և հետախուզում"],
+ [1,"Արբանյակ = ?","Բաս (Bus, պլատֆորմ) + Օգտակար բեռ (Payload)"],
+ [1,"Spin Axis Stabilized","Բաս, որի կողմնորոշումը պահվում է իր առանցքի շուրջ պտույտով"],
+ [1,"TRL","Technology Readiness Level՝ տեխնոլոգիայի պատրաստվածության մակարդակ (1–9)"],
+ [1,"TRL 3–4","Գաղափարի ապացույց և լաբորատոր մակետ (breadboard)"],
+ [1,"TRL 5–6","Տեխնոլոգիայի ցուցադրում"],
+ [1,"TRL 9","Տեխնոլոգիայի հաջող կիրառում տիեզերքում․ CubeSat առաքելությունները պահանջում են TRL 9"],
+ [2,"Քարմանի գիծ","Տիեզերքի սկիզբը՝ ≈ 100 կմ (62 մղոն)"],
+ [2,"Տրոպոսֆերա","0–10(12) կմ, բարձրության հետ T-ն նվազում է, օդը նոսրանում է"],
+ [2,"Ստրատոսֆերա","Մինչև 50 կմ, տաք, օզոնային շերտ"],
+ [2,"Մեզոսֆերա","Մինչև 85 կմ, ցուրտ՝ −90 °C"],
+ [2,"Թերմոսֆերա","85 → 500–1000 կմ, 1500 °C, շատ ցածր խտություն, ISS, բևեռափայլ, իոնոսֆերա"],
+ [2,"Էկզոսֆերա","1000 → ~10 000 կմ, հիմնականում ջրածին և հելիում"],
+ [2,"Օդային SAR","10–12 կմ բարձրության ռադարային դիտարկում"],
+ [2,"Space Shuttle-ի բարձրություն","185–575 կմ"],
+ [2,"Իներցիա","Որքան դժվար է ինչ-որ բան տեղափոխելը"],
+ [2,"Քաշ","Ձգողականության ազդեցությունը զանգվածի վրա"],
+ [2,"Գծային իմպուլս","Զանգվածի և արագության արտադրյալ"],
+ [2,"LEO","160–1500 կմ, պարբերություն 90–120 ր, օրական մինչև 16 պտույտ"],
+ [2,"MEO","5000–20 000 կմ, նավիգացիա (GPS, GLONASS, Galileo)"],
+ [2,"GEO","35 786 կմ, հասարակածի վերևում․ 3 արբանյակ՝ գրեթե գլոբալ ծածկույթ"],
+ [2,"SSO","600–800 կմ, բևեռներով, նույն տեղական արեգակնային ժամին → Երկրի դիտարկում"],
+ [2,"GTO","Փոխանցման ուղեծիր դեպի GEO․ արբանյակի շարժիչը հասցնում է նպատակակետին"],
+ [2,"Վան Ալլենի ներքին գոտի","1000–13 000 կմ, բարձր էներգիայի պրոտոններ"],
+ [2,"SAA","Հարավատլանտյան անոմալիա, 200–800 կմ"],
+ [2,"Խանգարում (perturbation)","Փոքր ուժ, որը շեղում է արբանյակը իդեալական ուղեծրից"],
+ [2,"600 կմ-ից ցածր","Արբանյակները հակված են անկման՝ մթնոլորտային դիմադրության պատճառով"],
+ [2,"Տրանսպոնդեր","Կապի բեռի միավոր՝ ռադիոալիքների ընդունիչ + հաղորդիչ"],
+ [2,"Պասիվ հեռազննում","Բազմասպեկտրային/հիպերսպեկտրային սենսորներ, չափում են ստացված ճառագայթումը"],
+ [2,"Ակտիվ հեռազննում","Ինքն է արձակում ազդանշան և չափում անդրադարձը՝ ռադար, լիդար, սկատերոմետր"],
+ [2,"GNSS","Գլոբալ նավիգացիոն համակարգ՝ GPS (ԱՄՆ), Galileo (Եվրոպա), BeiDou (Չինաստան)"],
+ [2,"RNSS","Տարածաշրջանային նավիգացիոն համակարգ, օր․ Հնդկաստանի IRNSS"],
+ [2,"OBC","On Board Computer՝ ներդիր համակարգիչ"],
+ [2,"EPS","Electric Power Subsystem՝ էլեկտրաէներգիայի ենթահամակարգ"],
+ [2,"ADCS","Attitude Determination & Control Subsystem՝ դիրքորոշման որոշում և կառավարում"],
+ [2,"CubeSat (1U) զանգված","1.3 կգ (10×10×10 սմ)"],
+ [2,"CanSat-ի չափերը","Բարձրությունը 12.2 սմ, տրամագիծը 6.62 սմ"],
+ [2,"3U CubeSat չափեր","100 × 100 × 340.5 մմ"],
+ [3,"Բաղադրիչների ճարտարագիտություն","Որոշում է՝ ի՞նչ կարող եմ անել (what can be done)"],
+ [3,"Համակարգային ճարտարագիտություն","Որոշում է՝ ի՞նչ պետք է անել (what should be)"],
+ [3,"Պահանջներ","Համակարգի տրամաբանական և ֆիզիկական նկարագրությունների հայտարարությունները"],
+ [3,"Ցածր տեխնոլոգիա","Չի պահանջում ծանր տեխնիկա, չկան համակարգիչներ"],
+ [3,"Բարձր տեխնոլոգիա","Բարձր մակարդակի տեխնիկա, վերջին տեխնոլոգիաներ, համակարգչային էլեկտրոնիկա"],
+ [3,"Գլխավոր գիտնական","Որոշում է առաքելության նպատակը, հաշվետու է հովանավորին/ֆինանսավորողին"],
+ [3,"Ծրագրի ղեկավար","Թասքեր, ժամկետներ, բյուջե, ռիսկեր․ հաշվետու է շահագրգիռ կողմերին"],
+ [3,"Համակարգերի ճարտարագետ","Պատասխանատու է ինժեներական թիմի համար, հաշվետու է ծրագրի ղեկավարին"],
+ [3,"Pre-Phase A","Հայեցակարգի ուսումնասիրություն (Concept Studies)"],
+ [3,"Phase A","Հայեցակարգի և տեխնոլոգիայի զարգացում"],
+ [3,"Phase B","Նախնական նախագծում և տեխնոլոգիայի ավարտ"],
+ [3,"Phase C","Վերջնական ձևավորում և պատրաստում"],
+ [3,"Phase D","Համակարգի հավաքում, ինտեգրում, փորձարկում, արձակում"],
+ [3,"Phase E","Գործարկում և պահպանում"],
+ [3,"Phase F","Փակում (Closeout)"],
+ [3,"KDP","Key Decision Point՝ հիմնական որոշման կետ"],
+ [3,"MCR","Mission Concept Review՝ առաքելության հայեցակարգի վերանայում"],
+ [3,"PDR","Preliminary Design Review՝ նախնական դիզայնի վերանայում"],
+ [3,"CDR","Critical Design Review՝ մանրամասն (քննադատական) դիզայնի վերանայում"],
+ [3,"SIR","System Integration Review՝ համակարգի ինտեգրման վերանայում"],
+ [3,"ORR","Operation Readiness Review՝ գործառնական պատրաստության վերանայում"],
+ [3,"DRR","Disposal Readiness Review՝ հեռացման պատրաստության վերանայում"],
+ [3,"KDP C","Հաստատման վերանայում (confirmation review)՝ նախագծի մեկնարկ"]
+],
+
+// Quiz: correct answer is always first in data; options are shuffled at runtime.
+quiz: [
+ [1,"Ինչ է արբանյակը։",["Օբյեկտ, որը պտտվում է ավելի մեծ օբյեկտի շուրջ","Ցանկացած հրթիռ տիեզերքում","Միայն արհեստական սարք ուղեծրում","Աստղ, որը պտտվում է մոլորակի շուրջ"],"Դասախոսություն 1-ի սահմանումը։"],
+ [1,"Երբ է արձակվել Sputnik 1-ը։",["1957 թ. հոկտեմբերի 4-ին","1961 թ. ապրիլի 12-ին","1969 թ. հուլիսի 20-ին","1957 թ. նոյեմբերի 3-ին"],"Առաջին արհեստական արբանյակն է։"],
+ [1,"Արեգակնային համակարգի ո՞ր մոլորակները չունեն բնական արբանյակներ։",["Մերկուրի և Վեներա","Մարս և Վեներա","Մերկուրի և Մարս","Երկիր և Վեներա"],"Մնացած բոլոր մոլորակներն ունեն։"],
+ [1,"Ո՞րն է բնորոշ Space Engineering-ին։",["Ամբողջական տիեզերական համակարգի ճարտարապետություն՝ հրթիռ, ուղեծրեր, վերգետնյա կառավարում","Միայն ենթահամակարգի զոդում","Միայն արբանյակի փորձարկում","Միայն ծրագրային ապահովում"],"Spacecraft Engineering-ը կենտրոնանում է տիեզերանավի վրա, Space Engineering-ը՝ ամբողջ համակարգի։"],
+ [1,"1U CubeSat-ի չափերն են՝",["10 × 10 × 10 սմ","5 × 5 × 5 սմ","10 × 10 × 30 սմ","20 × 20 × 20 սմ"],"3U-ն ≈ 30 սմ է։"],
+ [1,"Նանոարբանյակի զանգվածը (նոմենկլատուրայով)՝",["1–10 կգ","0.1–1 կգ","10–100 կգ","100–500 կգ"],"Պիկո 0.1–1, նանո 1–10, միկրո 10–100, մինի 100–500 կգ։"],
+ [1,"Մինչև որքան զանգվածով արբանյակներն են համարվում փոքր։",["500 կգ","100 կգ","1000 կգ","50 կգ"],"Small Satellites՝ մինչև 500 կգ։"],
+ [1,"12U CubeSat-ը համապատասխանում է ո՞ր զանգվածային դասին։",["Միկրոարբանյակ","Պիկոարբանյակ","Մինիարբանյակ","Նանոարբանյակ"],"Նոմենկլատուրայի սխեմայում 12U → միկրո (10–100 կգ)։"],
+ [1,"Ո՞ր տիեզերանավն է օրինակ բերված որպես ≈ 20 մ չափի մեծ սարք։",["Juno","Sputnik 1","Space Bee","ION"],"Juno-ն համեմատվում է 1U–3U CubeSat-երի հետ։"],
+ [1,"Ով չի նշված CubeSat-ի հիմնադիրների շարքում։",["Վերներ ֆոն Բրաուն","Bob Twiggs","Jordi Puig-Suari","Henry Helvajian"],"Հիմնադիրներ՝ Robinson, Helvajian, Twiggs, Puig-Suari։"],
+ [1,"Համակարգի սահմանումն ըստ INCOSE-ի՝",["Փոխազդող տարրերի համակցություն, կազմակերպված նշված նպատակներին հասնելու համար","Նույնատիպ բաղադրիչների պատահական հավաքածու","Միայն ծրագրային և սարքային ապահովում","Ցանկացած բարդ մեքենա"],"INCOSE SE Handbook V3.2։"],
+ [1,"Տիեզերական համակարգի հիերարխիայի ամենաներքին մակարդակը՝",["Տեխնոլոգիաներ","Բաղադրիչներ","Ենթահամակարգեր","Հավաքույթներ"],"Համակարգ → ենթահամակարգ → հավաքույթ → բաղադրիչ → տեխնոլոգիա։"],
+ [1,"Ի՞նչ է նշանակում TD հապավումը առաքելության նպատակներում։",["Տեխնոլոգիայի ցուցադրում","Տիեզերական տվյալներ","Ջերմային դիզայն","Տելեմետրիայի փոխանցում"],"Technology Demonstration։"],
+ [1,"EO հապավումը նշանակում է՝",["Երկրի դիտում","Էլեկտրական ուղեծիր","Էներգիայի օպտիմալացում","Էքսպերիմենտալ օբյեկտ"],"Earth Observation։"],
+ [1,"Ի՞նչ է դրված փոքր արբանյակների գործածման վերջնական նպատակում։",["Հայաստանի ապահովություն և անվտանգություն","Միայն առևտրային շահույթ","Մարսի գաղութացում","Միայն ուսանողական մրցույթներ"],"Սլայդ «Ինչն է նպատակը»։"],
+ [1,"Արբանյակը բաղկացած է՝",["Բասից և օգտակար բեռից","Միայն օգտակար բեռից","Հրթիռից և բասից","Վերգետնյա կայանից և բասից"],"Bus + Payload = Satellite։"],
+ [1,"Cassini-ի կողմնորոշումը պահվում էր՝",["Շարժիչներով և ռեակցիոն անիվներով","Միայն պտույտով","Մագնիսներով","Արևային առագաստով"],"Եռառանցք կայունացում։ Պտույտով կայունացվածը Spin Axis Stabilized-ն է։"],
+ [1,"Ո՞ր ձևաչափն ունի Space Bee արբանյակը։",["0.25U","12U","6U","2U"],"SWARM Technology-ի Space Bee։"],
+ [1,"TRL 3–4 մակարդակները նախատեսված են՝",["Գաղափարի ապացույցի և լաբորատոր մակետի համար","Թռիչքային շահագործման համար","Համակարգի փորձարկման համար","Հիմնարար հետազոտության համար"],"TRL 1–2՝ հիմնարար, 5–6՝ ցուցադրում։"],
+ [1,"TRL 7-ը՝",["Փորձարկում, ստուգում և վավերացում","Հիմնարար հետազոտություն","Հաջող կիրառում տիեզերքում","Գաղափարի հայտնագործում"],"TRL 8՝ փորձարկում համակարգում, TRL 9՝ տիեզերքում։"],
+ [1,"Ի՞նչ TRL են պահանջում CubeSat առաքելությունները։",["TRL 9","TRL 6","TRL 4","TRL 1"],"Թռիչքային որակավորում ունեցող բաղադրիչներ։"],
+ [1,"«Բետա» նախատիպը գործառնական միջավայրում համապատասխանում է՝",["TRL 7","TRL 6","TRL 5","TRL 9"],"TRL 6-ը «ալֆա» նախատիպն է համապատասխան միջավայրում։"],
+ [2,"Որտեղից է սկսվում տիեզերքը։",["Քարմանի գծից՝ ≈ 100 կմ","Օզոնային շերտից՝ ≈ 25 կմ","35 786 կմ-ից","10 կմ-ից"],"≈ 62 մղոն։"],
+ [2,"Ո՞ր շերտում է գտնվում օզոնային շերտը։",["Ստրատոսֆերա","Տրոպոսֆերա","Մեզոսֆերա","Թերմոսֆերա"],"Ստրատոսֆերան մինչև 50 կմ է։"],
+ [2,"Մեզոսֆերայում ջերմաստիճանը հասնում է՝",["−90 °C","+1500 °C","0 °C","−273 °C"],"Թերմոսֆերայում՝ մինչև 1500 °C։"],
+ [2,"ISS-ը և բևեռափայլը գտնվում են՝",["Թերմոսֆերայում","Մեզոսֆերայում","Ստրատոսֆերայում","Էկզոսֆերայում"],"Թերմոսֆերան համընկնում է իոնոսֆերայի հետ։"],
+ [2,"Էկզոսֆերայի գազը հիմնականում՝",["Ջրածին և հելիում","Ազոտ և թթվածին","Օզոն","Ածխաթթու գազ"],"Օդը չափազանց նոսր է։"],
+ [2,"Օդային լուսանկարահանման բարձրությունը՝",["1.2–3.5 կմ","0.3 կմ","10–12 կմ","700–900 կմ"],"0.3 կմ՝ օդային հեռուստատեսություն, 10–12 կմ՝ օդային SAR։"],
+ [2,"Օպտիկական սենսորով/SAR-ով արբանյակների բարձրությունը՝",["700–900 կմ","185–575 կմ","10–12 կմ","35 786 կմ"],"Space Shuttle-ը՝ 185–575 կմ։"],
+ [2,"Ո՞րը տիեզերական միջավայրի գործոն չէ դասախոսության ցանկում։",["Ամպամածություն","Վակուում","Միկրոմետեորիտներ","Լիցքավորված մասնիկներ"],"Գործոններ՝ ճառագայթում, մասնիկներ, ձգողականություն, մթնոլորտ, վակուում, ջերմաստիճան, միկրոմետեորիտներ։"],
+ [2,"Կառավարման կապերն են՝",["UAV ↔ UAV, UAV ↔ CS, արբանյակ ↔ UAV-ներ և CS","Միայն սենսորների ներքին կապը","Միայն UAV ↔ դաշտ","Միայն արբանյակ ↔ արբանյակ"],"Հաղորդակցության կապերը՝ UAV ↔ UAV, UAV ↔ դաշտ, սենսորային ներքին կապ։"],
+ [2,"Գծային իմպուլսը՝",["Զանգվածի և արագության արտադրյալն է","Ուժի և ժամանակի հարաբերությունն է","Զանգվածի և արագացման արտադրյալն է","Պտտվող հատկությունների չափանիշն է"],"Պտտվող հատկությունների չափանիշը անկյունային իմպուլսն է։"],
+ [2,"Քաշը՝",["Ձգողականության ազդեցությունն է զանգվածի վրա","Նյութի քանակն է","Տեղափոխելու դժվարությունն է","Կինետիկ էներգիան է"],"Զանգվածը՝ նյութի քանակը, իներցիան՝ տեղափոխելու դժվարությունը։"],
+ [2,"LEO ուղեծրի պարբերությունը՝",["90–120 րոպե","24 ժամ","12 ժամ","10 րոպե"],"Օրական մինչև 16 պտույտ։"],
+ [2,"LEO-ի բարձրությունը (ըստ սլայդի)՝",["160–1500 կմ","5000–20 000 կմ","35 786 կմ","20 000–37 000 կմ"],"MEO՝ 5000–20 000 կմ։"],
+ [2,"GPS, GLONASS, Galileo օգտագործում են՝",["MEO","LEO","GEO","SSO"],"Նավիգացիոն ծառայություններ։"],
+ [2,"GEO-ի բարձրությունը՝",["35 786 կմ","20 200 կմ","1500 կմ","400 կմ"],"Ճշգրիտ հասարակածի վերևում։"],
+ [2,"Քանի՞ GEO արբանյակ է անհրաժեշտ գրեթե ամբողջ աշխարհը ծածկելու համար։",["3","1","12","24"],"Երեք հավասարաչափ տեղակայված արբանյակ։"],
+ [2,"SSO ուղեծրի գլխավոր առավելությունը՝",["Տրված վայրով անցնում է նույն տեղական արեգակնային ժամին","Արբանյակը անշարժ է երկնքում","Ամենամեծ ծածկույթն ունի","Չունի մթնոլորտային դիմադրություն"],"Լուսավորությունը նույնն է → Երկրի դիտարկում։"],
+ [2,"SSO-ի բարձրությունը՝",["600–800 կմ","5000–8000 կմ","35 786 կմ","100–150 կմ"],"Անցնում է բևեռներով։"],
+ [2,"GTO-ն՝",["Փոխանցման ուղեծիր դեպի GEO","Ցածր ուղեծիր ISS-ի համար","Բևեռային ուղեծիր","Լուսնային ուղեծիր"],"Հրթիռը թողնում է արբանյակը GTO-ում, արբանյակի շարժիչը հասցնում է GEO։"],
+ [2,"Գեոսինխրոն ուղեծիրը գեոստացիոնարից տարբերվում է նրանով, որ՝",["Կարող է թեքված լինել հասարակածի նկատմամբ","Ունի 12 ժամ պարբերություն","Գտնվում է LEO-ում","Չունի պարբերություն"],"Պարբերությունը նույնն է՝ մեկ օր։"],
+ [2,"Որքան բարձր է ուղեծիրը, այնքան՝",["Մեծ է ծածկույթը","Փոքր է ծածկույթը","Կարճ է պարբերությունը","Մեծ է մթնոլորտային դիմադրությունը"],"GEO > MEO > LEO։"],
+ [2,"Վան Ալլենի ներքին գոտին գտնվում է՝",["1000–13 000 կմ","200–800 կմ","35 786 կմ-ից վեր","100–200 կմ"],"Պարունակում է բարձր էներգիայի պրոտոններ։"],
+ [2,"Հարավատլանտյան անոմալիան (SAA) հանդիպում է՝",["200–800 կմ","1000–13 000 կմ","20 000 կմ","10–50 կմ"],"Դասախոսություն 2, ճառագայթում։"],
+ [2,"Ո՞րը ուղեծրային խանգարում չէ։",["Արբանյակի գույնը","Մթնոլորտային դիմադրություն","Երկրի փքվածություն","Լուսնի և Արեգակի ձգողություն"],"Նաև մագնիսական դաշտի փոխազդեցություններ։"],
+ [2,"Ինչ բարձրությունից ցածր արբանյակները հակված են անկման։",["600 կմ","2000 կմ","35 786 կմ","50 կմ"],"Պատճառը մթնոլորտային դիմադրությունն է։"],
+ [2,"Կապի բեռը համալրված է՝",["Տրանսպոնդերներով","Լիդարներով","Սպեկտրոմետրերով","Աստղադիտակներով"],"Ռադիոալիքների ընդունիչ և հաղորդիչ։"],
+ [2,"Ակտիվ հեռազննման սարք է՝",["Ռադար","Հիպերսպեկտրային կամերա","Ջերմային IR սենսոր","Բազմասպեկտրային սենսոր"],"Ակտիվը ինքն է արձակում ազդանշանը։"],
+ [2,"Պասիվ հեռազննման սենսորները՝",["Չափում են ստացված ճառագայթումը տարբեր սպեկտրալ գոտիներով","Արձակում են լազերային իմպուլս","Արձակում են ռադիոալիք և չափում անդրադարձը","Չափում են միայն ձայնը"],"Տեսանելի, IR, մոտ IR, ջերմային IR, միկրոալիքային։"],
+ [2,"Ո՞ր ուղեծիրն է իդեալական եղանակային արբանյակների համար։",["GEO","LEO 160 կմ","GTO","HEO"],"GOES-16, Meteosat, Himawari-9։"],
+ [2,"BeiDou-ն ո՞ր երկրի նավիգացիոն համակարգն է։",["Չինաստան","ԱՄՆ","Եվրոպա","Հնդկաստան"],"GPS՝ ԱՄՆ, Galileo՝ Եվրոպա, IRNSS՝ Հնդկաստան (RNSS)։"],
+ [2,"RNSS-ի օրինակ է՝",["IRNSS (Հնդկաստան)","GPS","Galileo","Starlink"],"Տարածաշրջանային նավիգացիոն համակարգ։"],
+ [2,"Նավիգացիոն համաստեղությունների բարձրությունը (ըստ սլայդի)՝",["20 000–37 000 կմ","160–1500 կմ","600–800 կմ","1–10 կմ"],"Հաղորդում են ժամանակ, դիրք, վիճակ։"],
+ [2,"Ինչու են աստղադիտակները տեղադրում ուղեծրում։",["Մթնոլորտը չի միջամտում դիտմանը","Այնտեղ ավելի տաք է","Ավելի մոտ են աստղերին","Կապը ավելի արագ է"],"Նաև IR պատկերումը չի խաբվում մակերևույթի ջերմությունից։"],
+ [2,"James Webb, Hubble, Planck արբանյակները՝",["Գիտական","Կապի","Նավիգացիոն","Եղանակային"],"Դասակարգում ըստ օգտակար բեռի։"],
+ [2,"Sentinel-2, Landsat-9, Terra արբանյակները՝",["Երկրի դիտարկման","Կապի","Միջմոլորակային","Նավիգացիոն"],"Կապի՝ Starlink, Inmarsat, Intelsat։"],
+ [2,"ADCS-ը՝",["Դիրքորոշման որոշման և կառավարման ենթահամակարգ","Էլեկտրասնուցման ենթահամակարգ","Ներդիր համակարգիչ","Կապի ենթահամակարգ"],"Attitude Determination & Control Subsystem։"],
+ [2,"Ո՞րը բասի ենթահամակարգ չէ։",["Օգտակար բեռ (Payload)","EPS","OBC","Ջերմային ենթահամակարգ"],"Payload + Bus = Satellite․ բեռը բասի մաս չէ։"],
+ [2,"1U CubeSat-ի զանգվածը (ըստ սլայդի)՝",["1.3 կգ","13 կգ","0.13 կգ","130 կգ"],"Չափերը՝ 10×10×10 սմ։"],
+ [2,"3U CubeSat-ի ստանդարտ չափերն են՝",["100 × 100 × 340.5 մմ","100 × 100 × 113.5 մմ","226.3 × 226.3 × 366 մմ","100 × 226.3 × 366 մմ"],"1U՝ 113.5, 12U՝ 226.3×226.3×366։"],
+ [2,"Ո՞րը CubeSat-ի կառուցվածքի պայմանների ցանկում չէ։",["Ջրակայունություն ծովում","Մեխանիկական բեռներ","Ճառագայթակայունություն","Բացման մեխանիզմներ"],"7 պայման՝ մեխանիկական, ջերմային, ճառագայթային, վակուում, EMC, ուղեծրային, բացման։"],
+ [2,"CanSat-ի տրամագիծը՝",["6.62 սմ","12.2 սմ","10 սմ","2.6 սմ"],"Բարձրությունը 12.2 սմ, տրամագիծը 6.62 սմ (2.6″)։"],
+ [3,"NanoPower P31u-ն 1U CubeSat-ում՝",["Էլեկտրասնուցման համակարգ","Թռիչքի համակարգիչ","Կառուցվածք","Ալեհավաք"],"NanoMind A712C՝ համակարգիչ, NanoCom U482C՝ UHF հաղորդիչ։"],
+ [3,"NanoCom U482C-ը՝",["UHF հաղորդիչ-ընդունիչ","Սպեկտրոմետր","Էլեկտրասնուցում","Արևային պանել"],"GOMSpace արտադրանք։"],
+ [3,"Ո՞ր տարրն է օրինակ բերված որպես CubeSat-ի կառուցվածք։",["ISIS 1U CubeSat շրջանակ","Spectruino","NanoMind A712C","UHF դիպոլ"],"Կառուցվածքը (Structure)՝ ISIS շրջանակ։"],
+ [3,"Համակարգի նկարագրության տեսակները՝",["Տրամաբանական, ֆիզիկական, տեխնիկական","Միայն ֆիզիկական","Տնտեսական և քաղաքական","Գրաֆիկական և ձայնային"],"Նկարագրությունների հայտարարությունները պահանջներ են։"],
+ [3,"Համակարգի նկարագրության հայտարարությունները կոչվում են՝",["Պահանջներ","Բաղադրիչներ","Վերանայումներ","Փուլեր"],"Requirements։"],
+ [3,"Համակարգային ճարտարագիտությունը որոշում է՝",["Ինչ պետք է անել (what should be)","Ինչ կարող եմ անել (what can be done)","Միայն բյուջեն","Միայն արձակման ամսաթիվը"],"Բաղադրիչների ճարտարագիտությունը՝ what can be done։"],
+ [3,"Միջին տեխնոլոգիան պահանջում է՝",["Բարդ տեխնիկայի որոշակի մակարդակ, համակարգչային էլեկտրոնիկա","Ոչ մի համակարգիչ","Միայն վերջին տեխնոլոգիաներ","Ձեռքի աշխատանք"],"Ցածր՝ առանց համակարգիչների, բարձր՝ վերջին տեխնոլոգիաներ։"],
+ [3,"Տեխնոլոգիայի ճանապարհի վերջին քայլը՝",["Դառնում է համակարգի բաղադրիչի հիմնական մասը","Ծրագրվում է","Գնահատվում է","Մոռացվում է"],"Ծրագրվում → գնահատվում → ղեկավարվում → փոխանցվում → առևտրայնացվում → գնարժեքավորվում → բաղադրիչ։"],
+ [3,"Ով է որոշում առաքելության նպատակը։",["Գլխավոր գիտնականը","Ծրագրի ղեկավարը","Հրթիռի ինժեները","Հաճախորդի հաշվապահը"],"Հաշվետու է հովանավորին կամ ֆինանսավորողին։"],
+ [3,"Ծրագրի ղեկավարը պատասխանատու է՝",["Թասքերի, ժամկետների, բյուջեի, ռիսկերի համար","Միայն գիտական նպատակի համար","Միայն արբանյակի զոդման համար","Միայն հրթիռի համար"],"Հաշվետու է շահագրգիռ կողմերին։"],
+ [3,"Համակարգերի ճարտարագետը հաշվետու է՝",["Ծրագրի ղեկավարին","Հովանավորին","Հրթիռի ինժեներին","Բեռի ինժեներին"],"Պատասխանատու է ինժեներատեխնիկական թիմի համար։"],
+ [3,"Ով է զբաղվում բասով (Bus) նախագծի շղթայում։",["Գլխավոր ինժեները (Chief Engineer)","Բեռի ինժեները","Գլխավոր գիտնականը","Հրթիռի ինժեները"],"Payload-ով զբաղվում է Payload Engineer-ը։"],
+ [3,"Տիեզերական թռիչքի նախագծի 09 տարրը՝",["Վերգետնյա համակարգեր","Տիեզերանավ","Օգտակար բեռներ","Նախագծի ղեկավարում"],"06՝ տիեզերանավ, 05՝ բեռներ, 01՝ ղեկավարում։"],
+ [3,"«Education and Public Outreach»-ը նախագծի կառուցվածքում ո՞ր համարն է։",["11","01","07","10"],"10՝ ինտեգրում և փորձարկում։"],
+ [3,"Pre-Phase A-ն՝",["Հայեցակարգի ուսումնասիրություն","Վերջնական ձևավորում","Փակում","Գործարկում"],"Նախաձևակերպման փուլ։"],
+ [3,"Phase C-ն՝",["Վերջնական ձևավորում և պատրաստում","Նախնական նախագծում","Գործարկում և պահպանում","Հայեցակարգի ուսումնասիրություն"],"Իրականացման մասի սկիզբը։"],
+ [3,"Phase D-ն ներառում է՝",["Հավաքում, ինտեգրում, փորձարկում և արձակում","Միայն հայեցակարգ","Փակում","Միայն շահագործում"],"System Assembly, Integration and Test, Launch։"],
+ [3,"Phase E-ն՝",["Գործարկում և պահպանում","Փակում","Նախնական նախագծում","Արտադրում"],"Phase F՝ փակում (Closeout)։"],
+ [3,"Ո՞ր փուլերն են կազմում ձևակերպումը (Formulation)։",["Phase A և Phase B","Phase C և Phase D","Phase E և Phase F","Միայն Pre-Phase A"],"Pre-Phase A-ն նախաձևակերպումն է, C–D՝ իրականացում։"],
+ [3,"CDR հապավումը՝",["Critical Design Review","Concept Design Review","Control Data Record","Critical Decision Rule"],"Մանրամասն (քննադատական) դիզայնի վերանայում։"],
+ [3,"KDP C-ն՝",["Հաստատման վերանայում՝ նախագծի մեկնարկ","Առաքելության փակում","Արձակման ամսաթիվ","Հայեցակարգի ուսումնասիրության սկիզբ"],"Ձևակերպումից անցում իրականացման։"],
+ [3,"Որ վերանայումն է կապված շահագործումից հանելու հետ։",["DR","PDR","SRR","MCR"],"Decommissioning Review․ DRR՝ հեռացման պատրաստություն։"],
+ [3,"Ընդհանուր կյանքի ցիկլի մոդելում փուլերը՝",["Փոխկապակցված են և կարող են համակցվել կամ համընկնել","Միշտ խիստ անկախ են","Կատարվում են հակառակ հերթականությամբ","Միշտ նույն տևողությունն ունեն"],"Կախված նախագծի չափից և բարդությունից։"],
+ [3,"Ո՞րը տիեզերական համակարգի տարր չէ դասախոսության սխեմայում։",["Մանրածախ խանութ","Վերգետնյա կայաններ","Տրանսպորտացիա","Ուղեծրեր"],"Նաև՝ նպատակ, արբանյակ, կառավարման սենյակ, տվյալների բաշխում։"]
+]
+};
+window.IMG = {};
+["l1-scope","l1-cube-juno","l1-forms","l1-mass","l1-nomen","l1-founders","l1-hierarchy","l1-bus-types","l1-industry","l1-trl","l1-trl-table",
+ "l2-airborne","l2-altitudes","l2-links","l2-layers","l2-karman","l2-orbits","l2-cone","l2-leo","l2-meo","l2-geo","l2-sso","l2-gto","l2-orbits2","l2-vanallen","l2-comsat","l2-passive","l2-active","l2-payloads","l2-bus","l2-cansat",
+ "l3-exploded","l3-mgmt","l3-wbs","l3-stairs","l3-lifecycle","l3-reviews","l3-ground"].forEach(k => window.IMG[k] = 'img/' + k + '.webp');
+</script>
+<script>
+(function(){
+const D = window.DATA, IMG = window.IMG || {};
+const $ = (s, el=document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const strip = h => h.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+
+/* ---------- storage (per-viewer convenience; app works without it) ---------- */
+const KEY = 'smallsat-mt1-v1';
+let S = { read:{}, rate:{}, known:{}, quiz:[], sup:true, draft:{}, chk:{} };
+try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch(e){}
+S.draft = S.draft || {}; S.chk = S.chk || {}; S.qmode = S.qmode || 'study';
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
+
+const ICONS = {
+  home:'<path d="M3 10.5 12 4l9 6.5V20h-6v-6H9v6H3z"/>',
+  lectures:'<path d="M4 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4zM20 5h-6a3 3 0 0 0-3 3"/><path d="M20 5v13h-7"/>',
+  questions:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.2v.1"/>',
+  cards:'<rect x="3" y="6" width="14" height="13" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v11"/>',
+  quiz:'<path d="M4 6h16M4 12h10M4 18h7"/><path d="m15 17 2 2 4-4"/>',
+  exam:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>',
+  orbits:'<circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(-25 12 12)"/><circle cx="20" cy="8" r="1.2"/>'
+};
+const VIEWS = [
+  ['home','Գլխավոր'],['lectures','Դասախոսություններ'],['questions','Գրավոր հարցեր'],
+  ['exam','Քննության փորձ'],['cards','Քարտեր'],['orbits','Ուղեծրեր'],['quiz','Թեստ']
+];
+function buildNav(cur){
+  $('#nav').innerHTML = VIEWS.map(([id,t]) => `<a href="#${id}" ${cur===id?'aria-current="page"':''}><svg class="ic" viewBox="0 0 24 24">${ICONS[id]}</svg>${t}</a>`).join('');
+  $('#mnav').innerHTML = VIEWS.map(([id,t]) => `<a href="#${id}" ${cur===id?'aria-current="page"':''}>${t}</a>`).join('');
+}
+
+const lecById = id => D.lectures.find(l => l.id === +id);
+const TOPICS = {1:'Փոքր արբանյակների ծավալը, կառուցվածքը, առաքելությունը',2:'Տիեզերական միջավայր, ուղեծրեր, օգտակար բեռ և պլատֆորմ',3:'Տարրեր, տեխնոլոգիաներ, նախագծի ղեկավարում և կյանքի ցիկլ'};
+const THEMES = Object.keys(TOPICS).map(Number);
+const RATE_T = ['Չգնահատված','Չգիտեմ','Մասամբ','Գիտեմ'];
+const rateOf = id => S.rate[id] || 0;
+
+/* ---------- figures ---------- */
+function figHTML(f){
+  const [id, cap] = f; if (!IMG[id]) return '';
+  return `<figure><div class="plate" data-zoom="${id}" role="button" tabindex="0" aria-label="Մեծացնել նկարը"><img src="${IMG[id]}" alt="${esc(cap)}" loading="lazy"></div><figcaption><b>Նկ․</b> ${esc(cap)}</figcaption></figure>`;
+}
+document.addEventListener('click', e => {
+  const z = e.target.closest('[data-zoom]');
+  if (z){ const id = z.dataset.zoom; $('#lb-img').src = IMG[id]; $('#lb-cap').textContent = z.querySelector('img').alt; $('#lb').hidden = false; }
+  const go = e.target.closest('[data-go]');
+  if (go){ e.preventDefault(); location.hash = go.dataset.go; }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') $('#lb').hidden = true;
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-zoom]')) { e.preventDefault(); e.target.click(); }
+});
+$('#lb').addEventListener('click', e => { if (e.target.id !== 'lb-img') $('#lb').hidden = true; });
+const wrapTables = html => html.replace(/<table class="tbl">/g,'<div class="tbl-wrap"><table class="tbl">').replace(/<\/table>/g,'</table></div>');
+
+/* ---------- HOME ---------- */
+function viewHome(){
+  const qs = D.questions;
+  const rated = qs.filter(q => rateOf(q.id)===3).length;
+  const readN = D.lectures.filter(l => S.read[l.id]).length;
+  const knownN = D.cards.filter((c,i) => S.known[i]).length;
+  const best = S.quiz.length ? Math.max(...S.quiz.map(r => Math.round(100*r.s/r.n))) : null;
+  const groups = THEMES.map(t => {
+    const items = qs.filter(q => q.t===t);
+    const lec = [...new Set(items.map(q=>q.l))].map(n=>'Դաս. '+n).join(', ');
+    return `<div class="topic"><div><h3>Դաս. ${t}. ${TOPICS[t]}</h3><p>${items.length} հարց · ${lec}</p></div>
+      <div class="segbar" title="${items.map(q=>q.id+': '+RATE_T[rateOf(q.id)]).join('\n')}">${items.map(q=>`<i class="r${rateOf(q.id)}"></i>`).join('')}</div></div>`;
+  }).join('');
+  const weak = qs.filter(q => rateOf(q.id) < 3).sort((a,b) => (rateOf(a.id)||1.5) - (rateOf(b.id)||1.5)).slice(0,4);
+  return `<div class="view">
+    <header class="view-head"><span class="eyebrow">Առաջին միջանկյալ · դասախոսություններ 1–3</span><h1>Ուսումնական վահանակ</h1>
+    <p class="lede">Կարդացեք դասախոսությունը, գրեք հարցի պատասխանը, ստուգեք այն և գնահատեք ձեզ։ Այստեղ կտեսնեք, թե որ թեմաներն են դեռ թույլ։ Բովանդակությունը կազմված է Մ. Հ. Պողոսեանի դասախոսությունների սլայդներից։</p></header>
+    <div class="stats">
+      <div class="stat"><b>${readN}/${D.lectures.length}</b><span>դասախոսություն կարդացված</span></div>
+      <div class="stat"><b>${rated}/${qs.length}</b><span>հարց «Գիտեմ»</span></div>
+      <div class="stat"><b>${knownN}/${D.cards.length}</b><span>քարտ սովորած</span></div>
+      <div class="stat"><b>${qs.filter(q=>(S.draft[q.id]||'').trim()).length}/${qs.length}</b><span>հարց գրավոր պատասխանված</span></div>
+    </div>
+    <section class="panel"><div class="row" style="justify-content:space-between;margin-bottom:6px"><h2 style="font-size:19px">Պատրաստվածություն ըստ թեմաների</h2>
+      <div class="legend"><span><i style="background:var(--good)"></i>Գիտեմ</span><span><i style="background:var(--warn)"></i>Մասամբ</span><span><i style="background:var(--bad)"></i>Չգիտեմ</span><span><i style="background:var(--sunk);border:1px solid var(--line)"></i>Չգնահատված</span></div></div>
+      <div class="topics">${groups}</div></section>
+    ${weak.length ? `<section class="qgroup"><h2 style="font-size:19px">Հաջորդը կրկնել</h2>${weak.map(q=>`<a class="hit" href="#questions" data-open="${q.id}" style="text-decoration:none;color:inherit"><b>${q.id} · ${RATE_T[rateOf(q.id)]}</b>${esc(q.q)}</a>`).join('')}</section>` : `<section class="panel"><b>Բոլոր հարցերը նշված են «Գիտեմ»։</b> Անցեք <a href="#exam">քննության փորձին</a>։</section>`}
+    <section class="qgroup"><h2 style="font-size:19px">Ինչպես պարապել</h2>
+    <div class="steps">
+      <div class="step"><b>Կարդալ</b>Դասախոսության կոնսպեկտ և նկարներ<a href="#lectures">Դասախոսություններ</a></div>
+      <div class="step"><b>Սովորել → Գրել</b>Կարդացեք պատասխանը, հետո գրեք և ստուգեք<a href="#questions">Գրավոր հարցեր</a></div>
+      <div class="step"><b>Ամրացնել</b>Սահմանումներ և թվեր քարտերով<a href="#cards">Քարտեր</a></div>
+      <div class="step"><b>Փորձել</b>3 հարց՝ յուրաքանչյուր դասից, 45 րոպե<a href="#exam">Քննության փորձ</a></div>
+      <div class="step"><b>Լրացուցիչ</b>${D.quiz.length} արագ թեստային հարց<a href="#quiz">Թեստ</a></div>
+    </div></section>
+  </div>`;
+}
+document.addEventListener('click', e => { const a = e.target.closest('[data-open]'); if (a) openQ = a.dataset.open; });
+
+/* ---------- LECTURES ---------- */
+let curLec = 1, lecQuery = '';
+function viewLectures(){
+  const l = lecById(curLec);
+  const tabs = D.lectures.map(x => `<button aria-pressed="${x.id===curLec}" data-lec="${x.id}">${S.read[x.id]?'<span class="dot" title="Կարդացված"></span>':''}Դաս. ${x.id}</button>`).join('');
+  let body;
+  if (lecQuery.trim().length > 1){
+    const q = lecQuery.trim().toLowerCase(), hits = [];
+    D.lectures.forEach(L => L.sections.forEach((s,i) => { const t = strip(s.html); const k = t.toLowerCase().indexOf(q); if (k>=0 || s.h.toLowerCase().includes(q)) hits.push({L,i,s,t,k}); }));
+    body = `<div class="search-hits"><p class="note">${hits.length} արդյունք «${esc(lecQuery)}»-ի համար</p>${hits.map(h => {
+      const a = Math.max(0,h.k-60), frag = h.k>=0 ? (a?'…':'')+esc(h.t.slice(a,h.k+120))+'…' : esc(h.t.slice(0,140))+'…';
+      const re = new RegExp(esc(lecQuery.trim()).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+      return `<button class="hit" data-jump="${h.L.id}:${h.i}"><b>Դասախոսություն ${h.L.id} · ${esc(h.s.h)}</b>${frag.replace(re, m=>`<mark>${m}</mark>`)}</button>`;}).join('')}</div>`;
+  } else {
+    body = `<article class="reader ${S.sup?'sup-on':''}">
+      <header class="reader-head"><span class="eyebrow">Դասախոսություն ${l.id} · ${l.date}</span><h2>${l.title}</h2>
+      <nav class="toc">${l.sections.map((s,i)=>`<a href="#lectures" data-jump="${l.id}:${i}">${s.h}</a>`).join('')}</nav></header>
+      ${l.sections.map((s,i) => `<section class="sec" id="s${l.id}-${i}"><h3><span class="n">${l.id}.${i+1}</span>${s.h}</h3>
+        <div class="prose">${wrapTables(s.html)}</div>
+        ${s.figs ? `<div class="figs">${s.figs.map(figHTML).join('')}</div>` : ''}</section>`).join('')}
+      <footer class="reader-foot">
+        <button class="btn ${S.read[l.id]?'':'primary'}" id="markread">${S.read[l.id]?'✓ Կարդացված է':'Նշել որպես կարդացված'}</button>
+        <a class="btn" href="#questions" data-qlec="${l.id}">Հարցեր այս թեմայից</a>
+        <a class="btn" href="#quiz" data-zlec="${l.id}">Թեստ այս դասախոսությունից</a>
+        ${l.id<D.lectures.length?`<button class="btn" data-lec="${l.id+1}">Հաջորդ դասախոսություն →</button>`:''}
+      </footer></article>`;
+  }
+  return `<div class="view">
+    <header class="view-head"><span class="eyebrow">Կոնսպեկտ</span><h1>Դասախոսություններ</h1>
+    <p class="lede">Սլայդների բովանդակությունը՝ մաքրված և կառուցվածքավորված, բնօրինակ նկարներով (սեղմեք՝ մեծացնելու համար)։</p></header>
+    <div class="row" style="justify-content:space-between">
+      <input type="search" id="lecq" placeholder="Որոնել տերմին, օր․ CubeSat" value="${esc(lecQuery)}" style="flex:1;min-width:200px;max-width:360px">
+      <label class="row" style="gap:6px;font-size:13.5px;color:var(--muted)"><input type="checkbox" id="supt" ${S.sup?'checked':''}> Ընդգծել լրացումները (սլայդներում չկա)</label>
+    </div>
+    <div class="lec-tabs">${tabs}</div>
+    ${body}
+  </div>`;
+}
+function bindLectures(){
+  document.querySelectorAll('[data-lec]').forEach(b => b.onclick = () => { curLec = +b.dataset.lec; lecQuery=''; render(); window.scrollTo(0,0); });
+  document.querySelectorAll('[data-jump]').forEach(b => b.onclick = e => { e.preventDefault(); const [L,i] = b.dataset.jump.split(':'); curLec=+L; lecQuery=''; render(); const el = document.getElementById('s'+L+'-'+i); if (el) el.scrollIntoView({behavior:'smooth'}); });
+  const q = $('#lecq'); if (q){ q.oninput = () => { lecQuery = q.value; const pos=q.selectionStart; render(); const n=$('#lecq'); n.focus(); n.setSelectionRange(pos,pos); }; }
+  const st = $('#supt'); if (st) st.onchange = () => { S.sup = st.checked; save(); render(); };
+  const mr = $('#markread'); if (mr) mr.onclick = () => { S.read[curLec] = !S.read[curLec]; save(); render(); };
+  document.querySelectorAll('[data-qlec]').forEach(a => a.onclick = () => { qFilter = 'l'+a.dataset.qlec; });
+  document.querySelectorAll('[data-zlec]').forEach(a => a.onclick = () => { quizCfg.lec = a.dataset.zlec; quiz = null; });
+}
+
+/* ---------- QUESTIONS ---------- */
+let openQ = null, qFilter = 'all', shown = {};
+function qMatches(q){
+  if (qFilter==='all') return true;
+  if (qFilter[0]==='l') return q.l === +qFilter.slice(1);
+  if (qFilter==='weak') return rateOf(q.id) < 3;
+  return true;
+}
+// Key points of a model answer = its <li> items; the student ticks the ones their written answer covered.
+const points = q => [...q.a.matchAll(/<li>([\s\S]*?)<\/li>/g)].map(m => m[1]);
+const chk = id => (S.chk[id] = S.chk[id] || []);
+function checklist(q){
+  const pts = points(q), c = chk(q.id), n = pts.filter((_,k)=>c[k]).length;
+  return `<div class="checklist"><div class="row" style="justify-content:space-between"><b>Ստուգեք ձեր պատասխանը․ ի՞նչ եք գրել</b><span class="mono cl-score">${n}/${pts.length}</span></div>
+    ${pts.map((p,k)=>`<label class="cl-item"><input type="checkbox" data-ck="${q.id}" data-k="${k}" ${c[k]?'checked':''}><span>${p}</span></label>`).join('')}</div>`;
+}
+function fullAnswer(q, open){
+  const L = lecById(q.l);
+  return `<details class="full" ${open?'open':''}><summary>Ամբողջական պատասխան (դասախոսության տեքստը և նկարները)</summary>
+    <div class="full-in ${S.sup?'sup-on':''}">${q.sec.map(i => { const s = L.sections[i]; return `<section class="sec"><h3><span class="n">${L.id}.${i+1}</span>${s.h}</h3><div class="prose">${wrapTables(s.html)}</div>${s.figs?`<div class="figs">${s.figs.map(figHTML).join('')}</div>`:''}</section>`; }).join('')}</div></details>`;
+}
+function rateRow(q){
+  const r = rateOf(q.id);
+  return `<div class="rate"><span style="color:var(--muted)">Որքանո՞վ գիտեք</span>${[1,2,3].map(k=>`<button data-r="${k}" data-rq="${q.id}" aria-pressed="${r===k}">${RATE_T[k]}</button>`).join('')}</div>`;
+}
+function qCard(q){
+  const open = openQ===q.id, r = rateOf(q.id), d = S.draft[q.id] || '';
+  if (S.qmode==='study') return `<div class="q" id="q-${q.id}">
+    <button class="q-head" data-tq="${q.id}" aria-expanded="${open}"><span class="q-id">${q.id}</span><span class="q-text">${esc(q.q)}</span><span class="badge r${r}">${RATE_T[r]}</span></button>
+    ${open ? `<div class="q-body"><span class="eyebrow">Պատասխանի պլան</span><div class="answer prose">${q.a}</div>${fullAnswer(q,true)}
+      <div class="row"><button class="btn small primary" data-tocheck="${q.id}">Սովորեցի → Ստուգել ինձ գրավոր</button></div>${rateRow(q)}</div>` : ''}
+  </div>`;
+  return `<div class="q" id="q-${q.id}">
+    <button class="q-head" data-tq="${q.id}" aria-expanded="${open}"><span class="q-id">${q.id}</span><span class="q-text">${esc(q.q)}</span><span class="badge r${r}">${RATE_T[r]}</span></button>
+    ${open ? `<div class="q-body">
+      <label class="eyebrow" for="dr-${q.id}">1 · Գրեք պատասխանը առանց նայելու</label>
+      <textarea id="dr-${q.id}" data-draft="${q.id}" placeholder="Սահմանում → բացատրություն → բանաձև կամ սխեմա → օրինակներ, թվեր…">${esc(d)}</textarea>
+      <div class="row" style="justify-content:space-between;font-size:13px;color:var(--muted)"><span class="wc" data-wc="${q.id}">${wc(d)}</span><span>Սևագիրը պահվում է ավտոմատ</span></div>
+      ${shown[q.id] ? `<span class="eyebrow">2 · Համեմատեք</span>${checklist(q)}${fullAnswer(q)}
+        <span class="eyebrow">3 · Գնահատեք ձեզ</span>${rateRow(q)}`
+      : `<div><button class="btn primary small" data-show="${q.id}">Ստուգել պատասխանը</button></div>`}
+    </div>` : ''}
+  </div>`;
+}
+const wc = t => { const n = (t.trim().match(/\S+/g)||[]).length; return n ? n+' բառ' : 'Դեռ ոչինչ գրված չէ'; };
+function viewQuestions(){
+  const F = [['all','Բոլորը'],['weak','Չսովորածները'],...D.lectures.map(l=>['l'+l.id,'Դաս. '+l.id])];
+  const groups = THEMES.map(t => {
+    const items = D.questions.filter(q => q.t===t && qMatches(q)); if (!items.length) return '';
+    return `<section class="qgroup"><h2>Դաս. ${t}. ${TOPICS[t]}</h2>${items.map(q=>qCard(q)).join('')}</section>`;
+  }).join('');
+  return `<div class="view">
+    <header class="view-head"><span class="eyebrow">Հարցեր · դասախոսություններ 1–3</span><h1>Գրավոր հարցեր</h1>
+    <p class="lede">Նախ <b>Սովորել</b> ռեժիմում կարդացեք հարցը և պատասխանը։ Հետո <b>Ստուգել</b> ռեժիմում գրեք պատասխանը առանց նայելու և համեմատեք հիմնական կետերի հետ։ Սեղմեք հարցի վրա՝ բացելու համար։</p></header>
+    <div class="panel tip"><b>Լավ գրավոր պատասխանի կառուցվածքը</b><ol><li><b>Սահմանում</b>՝ ճշգրիտ ձևակերպմամբ (օր․ «Արբանյակը … օբյեկտ է, որը…»)։</li><li><b>Բացատրություն</b>՝ ինչպես և ինչու է տեղի ունենում։</li><li><b>Սխեմա կամ աղյուսակ</b>՝ գծեք, եթե հարցը թույլ է տալիս (Bus + Payload, ուղեծրեր, TRL սանդղակ, կյանքի ցիկլ)։</li><li><b>Թվեր և օրինակներ</b>՝ բարձրություններ, զանգվածներ, չափեր, արբանյակների անուններ։</li></ol></div>
+    <div class="modes" role="tablist">
+      <button role="tab" data-qm="study" aria-selected="${S.qmode==='study'}"><b>1 · Սովորել</b><span>Կարդալ հարցերը պատասխաններով</span></button>
+      <button role="tab" data-qm="check" aria-selected="${S.qmode==='check'}"><b>2 · Ստուգել</b><span>Գրել առանց նայելու, համեմատել</span></button>
+    </div>
+    <div class="filters">${F.map(([k,t])=>`<button data-qf="${k}" aria-pressed="${qFilter===k}">${t}</button>`).join('')}</div>
+    ${groups || '<div class="panel">Այս ֆիլտրով հարցեր չկան։ Ընտրեք «Բոլորը»։</div>'}
+  </div>`;
+}
+function bindQuestions(){
+  document.querySelectorAll('[data-qm]').forEach(b => b.onclick = () => { S.qmode = b.dataset.qm; save(); render(); });
+  document.querySelectorAll('[data-tocheck]').forEach(b => b.onclick = () => { S.qmode = 'check'; openQ = b.dataset.tocheck; shown[openQ] = false; save(); render(); document.getElementById('q-'+openQ)?.scrollIntoView({block:'start'}); });
+  document.querySelectorAll('[data-qf]').forEach(b => b.onclick = () => { qFilter = b.dataset.qf; render(); });
+  document.querySelectorAll('[data-tq]').forEach(b => b.onclick = () => { openQ = openQ===b.dataset.tq ? null : b.dataset.tq; render(); });
+  document.querySelectorAll('[data-show]').forEach(b => b.onclick = () => { shown[b.dataset.show] = true; render(); });
+  document.querySelectorAll('[data-rq]').forEach(b => b.onclick = () => { S.rate[b.dataset.rq] = +b.dataset.r; save(); render(); });
+  bindWriting();
+  if (openQ){ const el = document.getElementById('q-'+openQ); if (el && !el.dataset.seen){ const r = el.getBoundingClientRect(); if (r.top<0||r.top>innerHeight-100) el.scrollIntoView({block:'start'}); } }
+}
+
+// Shared by question cards and the exam: drafts save without re-rendering (keeps focus), checkboxes update the score in place.
+function bindWriting(){
+  document.querySelectorAll('[data-draft]').forEach(t => t.oninput = () => {
+    S.draft[t.dataset.draft] = t.value; save();
+    const w = document.querySelector(`[data-wc="${t.dataset.draft}"]`); if (w) w.textContent = wc(t.value);
+  });
+  document.querySelectorAll('[data-ck]').forEach(b => b.onchange = () => {
+    chk(b.dataset.ck)[+b.dataset.k] = b.checked; save();
+    const box = b.closest('.checklist'), all = box.querySelectorAll('input'), n = [...all].filter(x=>x.checked).length;
+    box.querySelector('.cl-score').textContent = n+'/'+all.length;
+  });
+}
+
+/* ---------- FLASHCARDS ---------- */
+let deck = null, deckLec = 'all', deckOnlyNew = false, flipped = false;
+function makeDeck(){
+  let idx = D.cards.map((c,i)=>i).filter(i => deckLec==='all' || D.cards[i][0]===+deckLec);
+  if (deckOnlyNew) idx = idx.filter(i => !S.known[i]);
+  deck = { order: shuffle(idx), pos: 0 }; flipped = false;
+}
+function viewCards(){
+  if (!deck) makeDeck();
+  const total = deck.order.length, i = deck.order[deck.pos], c = D.cards[i];
+  const sel = `<select id="dlec"><option value="all">Բոլոր դասախոսությունները</option>${D.lectures.map(l=>`<option value="${l.id}" ${deckLec==l.id?'selected':''}>Դասախոսություն ${l.id}</option>`).join('')}</select>`;
+  const known = D.cards.filter((c,k)=>S.known[k] && (deckLec==='all'||c[0]===+deckLec)).length;
+  const scope = D.cards.filter(c=>deckLec==='all'||c[0]===+deckLec).length;
+  return `<div class="view">
+    <header class="view-head"><span class="eyebrow">${scope} քարտ · սովորած ${known}</span><h1>Քարտեր</h1>
+    <p class="lede">Տերմին → սահմանում։ Սեղմեք քարտին կամ Space՝ շրջելու համար, ← «Կրկնել», → «Գիտեմ»։</p></header>
+    <div class="row">${sel}<label class="row" style="gap:6px;font-size:14px"><input type="checkbox" id="donly" ${deckOnlyNew?'checked':''}> Միայն չսովորածները</label><button class="btn small" id="dshuf">Խառնել</button></div>
+    ${total ? `<div class="deck">
+      <div class="progress"><i style="width:${100*deck.pos/total}%"></i></div>
+      <button class="card ${flipped?'flipped':''}" id="card" aria-label="Շրջել քարտը"><div class="card-in">
+        <div class="face"><small>ԴԱՍ. ${c[0]} · ${deck.pos+1}/${total}</small><div class="term">${esc(c[1])}</div><span class="hint">Սեղմեք՝ շրջելու համար</span></div>
+        <div class="face back"><small>${S.known[i]?'✓ ՍՈՎՈՐԱԾ':'ՍԱՀՄԱՆՈՒՄ'}</small><div class="def">${esc(c[2])}</div></div>
+      </div></button>
+      <div class="deck-ctrl"><button class="btn" id="dprev" ${deck.pos?'':'disabled'}>← Նախորդ</button><button class="btn" id="dagain">Կրկնել</button><button class="btn primary" id="dknow">Գիտեմ</button></div>
+    </div>` : `<div class="panel">Այս խմբում բոլոր քարտերը սովորած են։ Հանեք «Միայն չսովորածները» նշումը՝ կրկնելու համար։</div>`}
+  </div>`;
+}
+function cardNext(knew){
+  const i = deck.order[deck.pos];
+  if (knew) S.known[i] = true; else { delete S.known[i]; deck.order.push(i); }
+  save(); deck.pos++; flipped = false;
+  if (deck.pos >= deck.order.length){ makeDeck(); }
+  render();
+}
+function bindCards(){
+  $('#dlec').onchange = e => { deckLec = e.target.value; makeDeck(); render(); };
+  $('#donly').onchange = e => { deckOnlyNew = e.target.checked; makeDeck(); render(); };
+  $('#dshuf').onclick = () => { makeDeck(); render(); };
+  const card = $('#card'); if (!card) return;
+  card.onclick = () => { flipped = !flipped; card.classList.toggle('flipped', flipped); };
+  $('#dknow').onclick = () => cardNext(true);
+  $('#dagain').onclick = () => cardNext(false);
+  $('#dprev').onclick = () => { deck.pos = Math.max(0,deck.pos-1); flipped=false; render(); };
+}
+document.addEventListener('keydown', e => {
+  if (route !== 'cards' || !$('#card') || e.target.matches('input,select,textarea')) return;
+  if (e.key===' '){ e.preventDefault(); $('#card').click(); }
+  if (e.key==='ArrowRight') cardNext(true);
+  if (e.key==='ArrowLeft') cardNext(false);
+});
+
+/* ---------- QUIZ ---------- */
+let quiz = null; const quizCfg = { lec:'all', n:15 };
+function startQuiz(){
+  let pool = D.quiz.map((q,i)=>i).filter(i => quizCfg.lec==='all' || D.quiz[i][0]===+quizCfg.lec);
+  pool = shuffle(pool).slice(0, quizCfg.n==='all' ? pool.length : +quizCfg.n);
+  quiz = { items: pool.map(i => ({ i, opts: shuffle(D.quiz[i][2].map((t,k)=>({t,ok:k===0}))), pick:null })), pos:0, done:false };
+}
+function viewQuiz(){
+  const head = `<header class="view-head"><span class="eyebrow">${D.quiz.length} հարց բանկում</span><h1>Թեստ</h1></header>`;
+  if (!quiz){
+    const hist = S.quiz.slice(-10);
+    return `<div class="view">${head}
+      <div class="panel" style="display:flex;flex-direction:column;gap:16px">
+        <div class="row"><label for="zlec" style="min-width:110px">Դասախոսություն</label><select id="zlec"><option value="all">Բոլորը (1–${D.lectures.length})</option>${D.lectures.map(l=>`<option value="${l.id}" ${quizCfg.lec==l.id?'selected':''}>${l.id}. ${l.title}</option>`).join('')}</select></div>
+        <div class="row"><label for="zn" style="min-width:110px">Հարցերի թիվ</label><select id="zn">${[10,15,25,'all'].map(n=>`<option value="${n}" ${quizCfg.n==n?'selected':''}>${n==='all'?'Բոլորը':n}</option>`).join('')}</select></div>
+        <div><button class="btn primary" id="zstart">Սկսել թեստը</button></div>
+      </div>
+      ${hist.length ? `<section class="panel"><h2 style="font-size:17px;margin-bottom:10px">Վերջին արդյունքները</h2><div class="row" style="align-items:flex-end;gap:16px"><div class="hist">${hist.map(r=>`<i style="height:${Math.max(4,60*r.s/r.n)}px" title="${r.s}/${r.n} · ${r.l==='all'?'բոլորը':'դաս. '+r.l}"></i>`).join('')}</div><span class="note">${hist.map(r=>Math.round(100*r.s/r.n)+'%').join(' · ')}</span></div></section>`:''}
+    </div>`;
+  }
+  if (quiz.done){
+    const s = quiz.items.filter(x=>x.pick!==null && x.opts[x.pick].ok).length, n = quiz.items.length;
+    const wrong = quiz.items.filter(x=>!x.opts[x.pick].ok);
+    return `<div class="view">${head}
+      <div class="panel row" style="gap:24px"><span class="score">${Math.round(100*s/n)}%</span><div><b>${s} ճիշտ ${n}-ից</b><br><span class="note">${s===n?'Կատարյալ է։':wrong.length+' սխալ․ դրանք ներքևում են՝ ճիշտ պատասխաններով։'}</span></div></div>
+      ${wrong.length?`<section class="mist"><h2 style="font-size:18px">Սխալներ</h2>${wrong.map(x=>{const Q=D.quiz[x.i];return `<div><b>${esc(Q[1])}</b><br>Ձեր պատասխանը՝ ${esc(x.opts[x.pick].t)}<br>Ճիշտ է՝ <b>${esc(Q[2][0])}</b><br><span class="note">${esc(Q[3])} (Դաս. ${Q[0]})</span></div>`;}).join('')}</section>`:''}
+      <div class="row"><button class="btn primary" id="zagain">Նոր թեստ</button><button class="btn" id="zsetup">Փոխել կարգավորումները</button></div></div>`;
+  }
+  const it = quiz.items[quiz.pos], Q = D.quiz[it.i], ans = it.pick!==null;
+  return `<div class="view">${head}
+    <div class="qz-top"><span>Հարց ${quiz.pos+1} / ${quiz.items.length} · Դաս. ${Q[0]}</span><span>${quiz.items.filter(x=>x.pick!==null&&x.opts[x.pick].ok).length} ճիշտ</span></div>
+    <div class="progress" style="max-width:none"><i style="width:${100*quiz.pos/quiz.items.length}%"></i></div>
+    <p class="qz-q">${esc(Q[1])}</p>
+    <div class="qz-opts">${it.opts.map((o,k)=>`<button class="opt ${ans&&o.ok?'ok':''} ${ans&&it.pick===k&&!o.ok?'no':''}" data-pick="${k}" ${ans?'disabled':''}><span class="k">${'ԱԲԳԴ'[k]}</span><span>${esc(o.t)}</span></button>`).join('')}</div>
+    ${ans?`<div class="explain"><b>${it.opts[it.pick].ok?'Ճիշտ է։':'Սխալ է։'}</b> ${esc(Q[3])}</div><div><button class="btn primary" id="znext">${quiz.pos+1<quiz.items.length?'Հաջորդը →':'Տեսնել արդյունքը'}</button></div>`:''}
+  </div>`;
+}
+function bindQuiz(){
+  if ($('#zstart')){ $('#zlec').onchange=e=>quizCfg.lec=e.target.value; $('#zn').onchange=e=>quizCfg.n=e.target.value; $('#zstart').onclick=()=>{startQuiz();render();}; }
+  document.querySelectorAll('[data-pick]').forEach(b => b.onclick = () => { quiz.items[quiz.pos].pick = +b.dataset.pick; render(); });
+  const nx = $('#znext'); if (nx) nx.onclick = () => {
+    if (quiz.pos+1 < quiz.items.length){ quiz.pos++; } else {
+      quiz.done = true; const s = quiz.items.filter(x=>x.opts[x.pick].ok).length;
+      S.quiz.push({s, n:quiz.items.length, l:quizCfg.lec, t:Date.now()}); S.quiz = S.quiz.slice(-30); save();
+    } render(); window.scrollTo(0,0); };
+  if ($('#zagain')){ $('#zagain').onclick=()=>{startQuiz();render();}; $('#zsetup').onclick=()=>{quiz=null;render();}; }
+}
+document.addEventListener('keydown', e => {
+  if (route!=='quiz' || !quiz || quiz.done || e.target.matches('input,select,textarea')) return;
+  const k = ['1','2','3','4'].indexOf(e.key); const it = quiz.items[quiz.pos];
+  if (k>=0 && it.pick===null && k<it.opts.length){ it.pick=k; render(); }
+  else if (e.key==='Enter' && it.pick!==null) $('#znext')?.click();
+});
+
+/* ---------- EXAM ---------- */
+let exam = null, tick = null;
+function startExam(mins){
+  const themes = shuffle(THEMES).slice(0,3).sort();
+  exam = { qs: themes.map(t => shuffle(D.questions.filter(q=>q.t===t))[0].id), end: mins ? Date.now()+mins*60000 : null, done:false, txt:{} };
+}
+const fmt = ms => { const s=Math.max(0,Math.round(ms/1000)); return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); };
+function viewExam(){
+  const head = `<header class="view-head"><span class="eyebrow">Տոմս՝ 3 հարց, մեկական յուրաքանչյուր դասախոսությունից</span><h1>Քննության փորձ</h1>`;
+  if (!exam) return `<div class="view">${head}<p class="lede">Ինչպես իսկական քննությունում․ 3 պատահական հարց՝ մեկական յուրաքանչյուր դասախոսությունից, ժամաչափով։ Գրեք պատասխանները առանց նյութին նայելու։ Ավարտելուց հետո ստուգեք յուրաքանչյուրը հիմնական կետերի ցանկով, կարդացեք ամբողջական պատասխանը և գնահատեք ձեզ։ Գնահատականը կերևա «Գրավոր հարցեր» բաժնում։</p></header>
+    <div class="panel row"><span>Ժամանակ՝</span><button class="btn primary" data-ex="45">45 րոպե</button><button class="btn" data-ex="30">30 րոպե</button><button class="btn" data-ex="0">Առանց ժամաչափի</button></div></div>`;
+  const qs = exam.qs.map(id => D.questions.find(q=>q.id===id));
+  return `<div class="view">${head}</header>
+    <div class="row" style="justify-content:space-between">${exam.end&&!exam.done?`<span class="timer" id="timer">${fmt(exam.end-Date.now())}</span>`:'<span></span>'}
+      ${exam.done?`<button class="btn" id="exnew">Նոր տոմս</button>`:`<button class="btn primary" id="exend">Ավարտել և ստուգել</button>`}</div>
+    ${qs.map((q,k)=>`<div class="ticket"><span class="q-id">Հարց ${k+1} · ${q.id} · Դաս. ${q.t}</span><h3>${esc(q.q)}</h3>
+      ${exam.done ? `${exam.txt[q.id]?`<div class="panel" style="white-space:pre-wrap;font-size:14.5px"><span class="eyebrow">Ձեր պատասխանը</span><br>${esc(exam.txt[q.id])}</div>`:''}
+        ${checklist(q)}${fullAnswer(q)}${rateRow(q)}`
+      : `<textarea id="ex-${k}" data-ext="${q.id}" placeholder="Գրեք պատասխանը այստեղ․ սահմանում, բացատրություն, բանաձև/սխեմա, թվեր…">${esc(exam.txt[q.id]||'')}</textarea>`}</div>`).join('')}
+  </div>`;
+}
+function bindExam(){
+  clearInterval(tick);
+  document.querySelectorAll('[data-ex]').forEach(b => b.onclick = () => { startExam(+b.dataset.ex); render(); });
+  document.querySelectorAll('[data-ext]').forEach(t => t.oninput = () => exam.txt[t.dataset.ext] = t.value);
+  const fin = () => { exam.done = true; clearInterval(tick); render(); window.scrollTo(0,0); };
+  if ($('#exend')) $('#exend').onclick = fin;
+  if ($('#exnew')) $('#exnew').onclick = () => { exam = null; render(); };
+  document.querySelectorAll('.ticket [data-rq]').forEach(b => b.onclick = () => { S.rate[b.dataset.rq] = +b.dataset.r; save(); render(); });
+  bindWriting();
+  if (exam && exam.end && !exam.done){
+    tick = setInterval(() => { const el = $('#timer'); if (!el) return clearInterval(tick); const left = exam.end-Date.now(); el.textContent = fmt(left); el.classList.toggle('low', left<5*60000); if (left<=0) fin(); }, 1000);
+  }
+}
+
+/* ---------- ORBITS / ALTITUDE EXPLORER ---------- */
+const H0=0.1, H1=50000, OX0=70, OX1=750, OY0=24, OY1=540;
+const LH0=Math.log10(H0), LH1=Math.log10(H1);
+const Yh = h => OY1 - (OY1-OY0)*(Math.log10(Math.max(h,H0))-LH0)/(LH1-LH0);
+const hY = y => Math.pow(10, LH0 + (OY1-y)/(OY1-OY0)*(LH1-LH0));
+const fmtH = h => h<1 ? Math.round(h*1000)+' մ' : (h<10 ? h.toFixed(1).replace('.',',') : Math.round(h).toLocaleString('hy-AM').replace(/,/g,' '))+' կմ';
+// [name, from km, to km, note]
+const LAYERS = [
+ ['Տրոպոսֆերա',0,12,'Բարձրության հետ ջերմաստիճանը նվազում է, օդը նոսրանում է։ Ինքնաթիռներ, դրոններ։'],
+ ['Ստրատոսֆերա',12,50,'Ավելի տաք է․ օզոնային շերտը։ Օդապարիկներ։'],
+ ['Մեզոսֆերա',50,85,'Ցուրտ՝ մինչև −90 °C։ Այրվում են երկնաքարերը։'],
+ ['Թերմոսֆերա',85,700,'Մինչև 1500 °C, շատ ցածր խտություն։ ISS, բևեռափայլ, իոնոսֆերա։ Վերին սահմանը 500–1000 կմ։'],
+ ['Էկզոսֆերա',700,10000,'Օդը չափազանց նոսր է․ ջրածին և հելիում։ Սկսվում է 700–1000 կմ-ից։'],
+ ['Արտաքին տիեզերք',10000,H1,'Մթնոլորտը գործնականում չկա։ MEO, GEO։']
+];
+// [id, name, from, to, column x, note]
+const ORBS = [
+ ['leo','LEO',160,1500,'Երկրի ցածր ուղեծիր․ 90–120 ր պարբերություն, օրական մինչև 16 պտույտ։ Հեռազննում, Երկրի դիտարկում, Iridium, Globalstar, Orbcomm։'],
+ ['sso','SSO',600,800,'Արեգակնային համաժամանակյա․ բևեռներով, նույն տեղական ժամին։ Երկրի դիտարկում։'],
+ ['meo','MEO',5000,20000,'Միջին ուղեծիր․ նավիգացիա՝ GPS, GLONASS, Galileo։'],
+ ['geo','GEO',35500,36100,'Գեոստացիոնար 35 786 կմ․ հասարակածի վերևում, 3 արբանյակ՝ գրեթե գլոբալ ծածկույթ։ Կապ, եղանակ։'],
+ ['gto','GTO',200,35786,'Փոխանցման ուղեծիր դեպի GEO (էլիպս՝ ցածր պերիգեյից մինչև GEO բարձրություն)։'],
+ ['heo','HEO',1000,40000,'Խիստ էլիպսաձև ուղեծիր, ապոգեյը ≈ 40 000 կմ։']
+];
+// [name, from, to, kind] kind: 'obj' or 'haz'
+const MARKS = [
+ ['Դրոն (UAV)',0.15,0.15,'obj'],['Օդային TV',0.3,0.3,'obj'],['Օդային լուսանկարում',1.2,3.5,'obj'],['Օդային SAR',10,12,'obj'],
+ ['Space Shuttle',185,575,'obj'],['ISS',400,420,'obj'],['Օպտիկական/SAR արբանյակ',700,900,'obj'],['GNSS (GPS)',20200,20200,'obj'],['GEO արբանյակներ',35786,35786,'obj'],
+ ['SAA',200,800,'haz'],['Վան Ալլեն (ներքին)',1000,13000,'haz'],['Քարմանի գիծ',100,100,'haz'],['Օզոնային շերտ',15,35,'haz']
+];
+const MU = 398600.4418, RE = 6371;
+let orbH = 400;
+const COLX = {layer:[OX0,250], orb:[262,470], obj:[482,620], haz:[620,OX1]};
+function viewOrbits(){
+  const band = (x0,x1,a,b,cls,extra='') => `<rect class="${cls}" x="${x0}" width="${x1-x0}" y="${Yh(b)}" height="${Math.max(2,Yh(a)-Yh(b))}" ${extra}/>`;
+  const yt = [0.1,0.3,1,3,10,30,100,300,1000,3000,10000,35786];
+  const orbX = {leo:[268,330],sso:[336,362],meo:[268,330],geo:[268,470],gto:[372,392],heo:[400,420]};
+  const svg = `<svg class="dg ob" id="ob" viewBox="0 0 770 570" role="img" aria-label="Բարձրություններ, մթնոլորտի շերտեր և ուղեծրեր">
+    ${yt.map(h=>`<line class="grid" x1="${OX0}" x2="${OX1}" y1="${Yh(h)}" y2="${Yh(h)}"/><text class="axis" x="${OX0-8}" y="${Yh(h)+4}" text-anchor="end">${h<1?h*1000+' մ':h.toLocaleString('en').replace(/,/g,' ')}</text>`).join('')}
+    <text class="axis" x="${OX0-8}" y="${OY0-10}" text-anchor="end">h, կմ</text>
+    <text class="colh" x="${(COLX.layer[0]+COLX.layer[1])/2}" y="${OY1+22}" text-anchor="middle">Մթնոլորտ</text>
+    <text class="colh" x="366" y="${OY1+22}" text-anchor="middle">Ուղեծրեր</text>
+    <text class="colh" x="551" y="${OY1+22}" text-anchor="middle">Սարքեր</text>
+    <text class="colh" x="685" y="${OY1+22}" text-anchor="middle">Վտանգներ</text>
+    ${LAYERS.map((l,i)=>band(COLX.layer[0],COLX.layer[1],Math.max(l[1],H0),l[2],'lay l'+i,`data-lay="${i}"`)).join('')}
+    ${LAYERS.map((l,i)=>{const a=Yh(Math.max(l[1],H0)),b=Yh(l[2]);return a-b>16?`<text class="lbl" x="${(COLX.layer[0]+COLX.layer[1])/2}" y="${(a+b)/2+4}" text-anchor="middle">${l[0]}</text>`:'';}).join('')}
+    ${ORBS.map(o=>{const [x0,x1]=orbX[o[0]];return band(x0,x1,o[2],o[3],'orb o-'+o[0])+`<text class="olbl" x="${o[0]==='geo'?x1-4:(x0+x1)/2}" y="${o[0]==='geo'?Yh(o[3])-4:(o[0]==='sso'?Yh(o[3])-4:(Yh(o[2])+Yh(o[3]))/2+4)}" text-anchor="${o[0]==='geo'?'end':'middle'}">${o[1]}</text>`;}).join('')}
+    ${MARKS.map(m=>{const x=m[3]==='obj'?COLX.obj[0]+6:COLX.haz[0]+6, y0=Yh(m[1]), y1=Yh(m[2]);
+      const ly = {'ISS':-9,'Space Shuttle':4,'Օպտիկական/SAR արբանյակ':-14,'SAA':10,'Քարմանի գիծ':0}[m[0]]||0;
+      return (m[1]===m[2] ? `<circle class="mk2 ${m[3]}" cx="${x+3}" cy="${y0}" r="3.5"/>` : `<rect class="mkb ${m[3]}" x="${x}" width="6" y="${y1}" height="${Math.max(3,y0-y1)}"/>`)+`<text class="mlbl" x="${x+12}" y="${(y0+y1)/2+4+ly}">${m[0]}</text>`;}).join('')}
+    <line class="karman" x1="${OX0}" x2="${OX1}" y1="${Yh(100)}" y2="${Yh(100)}"/>
+    <g><line class="mkl" id="obl" x1="${OX0}" x2="${OX1}"/><circle class="mk" id="obc" cx="${OX0}" r="6"/></g>
+  </svg>`;
+  const presets = [['Քարմանի գիծ',100],['ISS',400],['SSO',700],['Վան Ալլեն',3000],['GPS',20200],['GEO',35786]];
+  return `<div class="view">
+    <header class="view-head"><span class="eyebrow">Դասախոսություն 2 · մթնոլորտ և ուղեծրեր</span><h1>Ուղեծրեր և բարձրություններ</h1>
+    <p class="lede">Սեղմեք սանդղակի ցանկացած կետին կամ շարժեք սահիչը․ կտեսնեք մթնոլորտի շերտը, ուղեծրի տեսակը, սարքերն ու վտանգները այդ բարձրության վրա, ինչպես նաև շրջանային ուղեծրի արագությունն ու պարբերությունը։ Սանդղակը լոգարիթմական է։</p></header>
+    <div class="dg-wrap">${svg}</div>
+    <div class="dg-ctrl" style="grid-template-columns:minmax(0,1fr)">
+      <label for="obh">Բարձրություն՝ <b class="mono" id="obhv"></b><input type="range" id="obh" min="${LH0}" max="${LH1}" step="0.001" value="${Math.log10(orbH)}"></label>
+      <div class="row">${presets.map(([t,h])=>`<button class="btn small" data-oh="${h}">${t}</button>`).join('')}</div>
+    </div>
+    <div class="panel dg-info" id="obinfo"></div>
+    <section class="panel prose" style="max-width:none"><h2 style="font-size:18px;margin-bottom:8px">Ուղեծրերի ամփոփում</h2>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Ուղեծիր</th><th>Բարձրություն</th><th>Պարբերություն</th><th>Կիրառում</th></tr></thead><tbody>
+      <tr><td><b>LEO</b></td><td class="mono">160–1500 կմ</td><td class="mono">90–120 ր</td><td>Հեռազննում, Երկրի դիտարկում, mesh ցանցեր</td></tr>
+      <tr><td><b>SSO</b></td><td class="mono">600–800 կմ</td><td class="mono">≈ 97–101 ր</td><td>Երկրի դիտարկում նույն լուսավորությամբ</td></tr>
+      <tr><td><b>MEO</b></td><td class="mono">5000–20 000 կմ</td><td class="mono">≈ 3–12 ժ</td><td>Նավիգացիա՝ GPS, GLONASS, Galileo</td></tr>
+      <tr><td><b>GEO</b></td><td class="mono">35 786 կմ</td><td class="mono">23 ժ 56 ր</td><td>Կապ, եղանակ․ 3 արբանյակ՝ գլոբալ ծածկույթ</td></tr>
+      <tr><td><b>GTO</b></td><td class="mono">մինչև 35 786 կմ</td><td class="mono">≈ 10.5 ժ</td><td>Փոխանցում դեպի GEO</td></tr></tbody></table></div>
+      <p class="note">Պարբերությունները հաշվարկված են T = 2π·√(r³/μ) բանաձևով (լրացում, դասախոսությունում տրված է միայն LEO-ինը)։</p></section>
+  </div>`;
+}
+function obUpdate(){
+  const h = orbH, y = Yh(h);
+  $('#obhv').textContent = fmtH(h);
+  $('#obc').setAttribute('cy',y); ['y1','y2'].forEach(k=>$('#obl').setAttribute(k,y));
+  const li = LAYERS.findIndex(l => h>=l[1] && h<l[2]), L = LAYERS[li];
+  document.querySelectorAll('.lay').forEach(r => r.classList.toggle('on', +r.dataset.lay===li));
+  const near = (a,b) => h >= a/1.08 && h <= b*1.08;
+  const os = ORBS.filter(o => near(o[2],o[3]));
+  const ms = MARKS.filter(m => near(m[1],m[2]));
+  const r = RE + h, v = Math.sqrt(MU/r), T = 2*Math.PI*Math.sqrt(r*r*r/MU)/60;
+  const Tt = T<120 ? T.toFixed(1).replace('.',',')+' ր' : Math.floor(T/60)+' ժ '+Math.round(T%60)+' ր';
+  const orbitOk = h >= 100;
+  let warn = '';
+  if (h < 100) warn = 'Քարմանի գծից ցածր է՝ սա դեռ օդային տարածք է (Airborne)։ Ուղեծրային թռիչք հնարավոր չէ։';
+  else if (h < 160) warn = 'Մթնոլորտը դեռ խիտ է․ ուղեծիրը կքայքայվի մի քանի ժամում կամ օրում։';
+  else if (h < 600) warn = '600 կմ-ից ցածր արբանյակները հակված են անկման՝ մթնոլորտային դիմադրության պատճառով։';
+  $('#obinfo').innerHTML = `<div><span class="eyebrow">Շերտ</span><h3>${L[0]}</h3><p style="margin:6px 0 0">${L[3]}</p>
+      ${os.length?`<p style="margin:10px 0 0">${os.map(o=>`<b>${o[1]}</b>՝ ${o[4]}`).join('<br>')}</p>`:''}
+      ${warn?`<p class="note" style="margin:10px 0 0">${warn}</p>`:''}</div>
+    <dl class="kv"><dt>Բարձրություն</dt><dd class="mono">${fmtH(h)}</dd>
+      <dt>Ուղեծիր</dt><dd>${os.length?os.map(o=>o[1]).join(', '):'—'}</dd>
+      <dt>Այստեղ</dt><dd>${ms.length?ms.map(m=>m[0]).join(', '):'—'}</dd>
+      ${orbitOk?`<dt>Արագություն</dt><dd class="mono">${v.toFixed(2).replace('.',',')} կմ/վ</dd><dt>Պարբերություն</dt><dd class="mono">${Tt}</dd><dt>Պտույտ/օր</dt><dd class="mono">${(1440/T).toFixed(1).replace('.',',')}</dd>`:''}</dl>`;
+}
+function bindOrbits(){
+  const svg = $('#ob'), s = $('#obh');
+  svg.addEventListener('click', e => {
+    const pt = svg.createSVGPoint(); pt.x=e.clientX; pt.y=e.clientY; const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+    if (p.y<OY0||p.y>OY1) return;
+    orbH = hY(p.y); s.value = Math.log10(orbH); obUpdate();
+  });
+  s.oninput = () => { orbH = Math.pow(10, +s.value); obUpdate(); };
+  document.querySelectorAll('[data-oh]').forEach(b => b.onclick = () => { orbH = +b.dataset.oh; s.value = Math.log10(orbH); obUpdate(); });
+  obUpdate();
+}
+
+/* ---------- router ---------- */
+let route = 'home';
+const V = { home:[viewHome,()=>{}], lectures:[viewLectures,bindLectures], questions:[viewQuestions,bindQuestions], cards:[viewCards,bindCards], quiz:[viewQuiz,bindQuiz], exam:[viewExam,bindExam], orbits:[viewOrbits,bindOrbits] };
+function render(){ buildNav(route); $('#main').innerHTML = V[route][0](); V[route][1](); }
+function onHash(){
+  const h = location.hash.slice(1);
+  const prev = route; route = V[h] ? h : 'home';
+  if (prev==='exam' && route!=='exam') clearInterval(tick);
+  render(); if (prev!==route) window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', onHash);
+$('#reset').onclick = e => {
+  const b = e.target;
+  if (b.dataset.armed){ S = { read:{}, rate:{}, known:{}, quiz:[], sup:true, draft:{}, chk:{} }; save(); deck=null; quiz=null; exam=null; b.textContent='Զրոյացված է'; delete b.dataset.armed; render(); }
+  else { b.dataset.armed='1'; b.textContent='Սեղմեք կրկին՝ հաստատելու համար'; setTimeout(()=>{ if(b.dataset.armed){delete b.dataset.armed; b.textContent='Զրոյացնել առաջընթացը';} },4000); }
+};
+onHash();
+})();
+</script>
+</body></html>
